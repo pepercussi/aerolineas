@@ -1,0 +1,26 @@
+.maincont{
+	margin-top: 40px;
+}
+
+.rowFiltro00{
+	margin-bottom: 10px;
+}
+
+.separador01{
+	width: 100%;
+	border-bottom: 1px solid #222222;
+	margin-bottom: 10px;
+}
+
+.loadCont00{
+	position: absolute; 
+	z-index: 10000; 
+	width: 100%; 
+	height: 100%; 
+	background-color: #000000;
+	background:rgba(0,0,0,0.8) ;
+	display: none;
+}
+#loadBarCont{
+	margin-top: 20%; 
+}
