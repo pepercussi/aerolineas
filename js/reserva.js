@@ -29,12 +29,13 @@ function buscaVuelos(){
 	$("#contTabVuelta").empty();
 	
 	//Controlo los datos cargados
+	/*
 	if(f_salida==''){
 		loadBarHide();
 		alert("Por favor, ingrese la fecha de salida.");
 		return(0);
 	}//End if
-	
+	*/
 	if(cod_destino==cod_origen){
 		loadBarHide();
 		alert("El destino y el origen deben ser distintos.");
@@ -43,12 +44,13 @@ function buscaVuelos(){
 	
 	if($("#chkRegreso").is(':checked')){
 		//Si esta tildado fecha de regreso...
+		/*
 		if(f_regreso==''){
 			loadBarHide();
 			alert("Por favor, ingrese la fecha de regreso.");
 			return(0);
 		}//End if
-		
+		*/
 		//Cargo el div de los vuelos de vuelta	
 		$("#contTabVuelta").load(
 			url, 
