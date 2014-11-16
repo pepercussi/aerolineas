@@ -1,13 +1,6 @@
 $(document).ready(function(){$(function() {$('#txtFechaSalida').datepicker({dateFormat: 'yy-mm-dd'});});});
 $(document).ready(function(){$(function() {$('#txtFechaRegreso').datepicker({dateFormat: 'yy-mm-dd'});});});
-function habilitaFechaRegreso(){
-	if($("#chkRegreso").is(':checked')){
-		$("#txtFechaRegreso").removeAttr("disabled");
-	}else{
-		$("#txtFechaRegreso").attr("disabled", "disabled");
-	}//end if
-}//End function habilitaFechaRegreso
-
+$(document).ready(function(){$(function() {$('#txtFechaNacimiento').datepicker({dateFormat: 'yy-mm-dd'});});});
 
 function buscaVuelos(){
 	//Muestro la barra de carga
@@ -100,6 +93,15 @@ function buscaVuelos(){
 	
 }//End function buscaVuelos
 
+function habilitaFechaRegreso(){
+	if($("#chkRegreso").is(':checked')){
+		$("#txtFechaRegreso").removeAttr("disabled");
+	}else{
+		$("#txtFechaRegreso").attr("disabled", "disabled");
+	}//end if
+}//End function habilitaFechaRegreso
+
+
 function loadBarHide(){
 	$("#load00").css("display", "none"); 
 	$("#load00").css("position", "absolute");
@@ -112,7 +114,7 @@ function loadBarShow(){
 	$("#load00").css("display", "block");
 }
 
-function seleccionaAsiento(){
+function siguientePaso(){
 	
 	var ida_y_vuelta=0;//Por defecto es solo un vuelo de ida
 	

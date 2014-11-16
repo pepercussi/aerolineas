@@ -99,7 +99,7 @@ $Aeropuerto = new Aeropuertos();
 				<div class="row separador01"></div>
 				<div class="row">
 					<div class="col-md-12 col-xs-12 text-center hidden" id="contBtnSiguiente">
-						<button type="button" class="btn btn-default btn-lg" onclick="seleccionaAsiento()" >Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+						<button type="button" class="btn btn-default btn-lg" onclick="siguientePaso()" >Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
 					</div>
 				</div>
 				

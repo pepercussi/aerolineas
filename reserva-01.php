@@ -39,69 +39,46 @@
 			<div class="row separador01"></div>
 			<form id="frmVuelos" action="reserva-01.php" method="post" role="form" class="form-inline">
 				<div class="row rowFiltro00">
-					<div class="col-md-1 col-xs-12"><label>Origen:</label></div>
-					<div class="col-md-11 col-xs-12">
-						<select class="form-control" name="selOrigen" id="selOrigen">
-							<?php
-							$arrAeropuertos = $Aeropuerto->getArrayAeropuertos();
-							
-							if(count($arrAeropuertos)>0){
-								foreach($arrAeropuertos as $aa){
-									echo "<option value='".$aa['codigo_aeropuerto']."'>".$aa['pais']." - ".$aa['provincia']." - ".$aa['ciudad']." - ".$aa['nombre_aeropuerto']."</option>";
-								}//End foreach
-							}else{
-								echo "<option value='0'>OCURRIO UN ERROR</option>";
-							}//End if
-							?>
-						</select>
-					</div>
-				<div class="row rowFiltro00">
-				</div>
-					<div class="col-md-1 col-xs-12"><label>Destino:</label></div>
-					<div class="col-md-11 col-xs-12">
-						<select class="form-control" name="selDestino" id="selDestino">
-							<?php
-							if(count($arrAeropuertos)>0){
-								foreach($arrAeropuertos as $aa){
-									echo "<option value='".$aa['codigo_aeropuerto']."'>".$aa['pais']." - ".$aa['provincia']." - ".$aa['ciudad']." - ".$aa['nombre_aeropuerto']."</option>";
-								}//End foreach
-							}else{
-								echo "<option value='0'>OCURRIO UN ERROR</option>";
-							}//End if
-							?>
-						</select>
-					</div>
+					<div class="col-md-4 col-xs-12"></div>
+					<div class="col-md-2 col-xs-12"><label>DNI:</label></div>
+					<div class="col-md-2 col-xs-12"><input class="form-control" type="text" id="txtDni" name="txtDni" placeholder="Ingrese su documento" required="" /></div>
+					<div class="col-md-4 col-xs-12"></div>
 				</div>
 				<div class="row rowFiltro00">
-					<div class="col-md-2 col-xs-12"><label>Fecha de Salida:</label></div>
-					<div class="col-md-2 col-xs-12"><input class="form-control" type="text" name="txtFechaSalida" id="txtFechaSalida" placeholder="AAAA-MM-DD" value="<?php echo date('Y-m-d');?>"/></div>
-					<div class="col-md-1 col-xs-12"></div>
-					<div class="col-md-2 col-xs-12"><input type="checkbox" class="form-control" id="chkRegreso" onclick="habilitaFechaRegreso()" />&nbsp;<label>Fecha de Regreso:</label></div>
-					<div class="col-md-2 col-xs-12"><input class="form-control" disabled="disabled" type="text" name="txtFechaRegreso" id="txtFechaRegreso" placeholder="AAAA-MM-DD"  value="<?php echo date('Y-m-d');?>"/></div>
+					<div class="col-md-4 col-xs-12"></div>
+					<div class="col-md-2 col-xs-12"><label>Fecha de Nacimiento:</label></div>
+					<div class="col-md-2 col-xs-12"><input class="form-control" type="text" id="txtFechaNacimiento" name="txtFechaNacimiento" placeholder="AAAA-MM-DD" required="" /></div>
+					<div class="col-md-4 col-xs-12"></div>
 				</div>
 				<div class="row rowFiltro00">
-					<div class="col-md-12 col-xs-12 text-center">
-						<button type="button" class="btn btn-default" onclick="buscaVuelos()">Buscar <span class="glyphicon glyphicon-search"></span></button>
-					</div>
+					<div class="col-md-4 col-xs-12"></div>
+					<div class="col-md-2 col-xs-12"><label>Nombre:</label></div>
+					<div class="col-md-2 col-xs-12"><input class="form-control" type="text" id="txtNombre" name="txtNombre" placeholder="Ingrese su nombre" required="" /></div>
+					<div class="col-md-4 col-xs-12"></div>
 				</div>
-				
+				<div class="row rowFiltro00">
+					<div class="col-md-4 col-xs-12"></div>
+					<div class="col-md-2 col-xs-12"><label>Apellido:</label></div>
+					<div class="col-md-2 col-xs-12"><input class="form-control" type="text" id="txtApellido" name="txtApellido" placeholder="Ingrese su apellido" required="" /></div>
+					<div class="col-md-4 col-xs-12"></div>
+				</div>
+				<div class="row rowFiltro00">
+					<div class="col-md-4 col-xs-12"></div>
+					<div class="col-md-2 col-xs-12"><label>Correo:</label></div>
+					<div class="col-md-2 col-xs-12"><input class="form-control" type="email" id="txtCorreo" name="txtCorreo" placeholder="Ingrese su correo" required="" /></div>
+					<div class="col-md-4 col-xs-12"></div>
+				</div>
+					
+				<div class="row rowFiltro00">
+					<div class="col-md-5 col-xs-12"></div>
+					<div class="col-md-2 col-xs-12">
+						<button type="button" class="btn btn-default btn-lg" onclick="seleccionaAsiento()" >Seleccionar Asiento <span class="glyphicon glyphicon-plane"></span></button>
+					</div>
+					<div class="col-md-5 col-xs-12"></div>
+				</div>
+
 				<div class="row separador01"></div>
-				<div class="row">
-					<div class="col-md-12 col-xs-12" id="contTabIda">
-						
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 col-xs-12" id="contTabVuelta">
-						
-					</div>
-				</div>
-				<div class="row separador01"></div>
-				<div class="row">
-					<div class="col-md-12 col-xs-12 text-center hidden" id="contBtnSiguiente">
-						<button type="button" class="btn btn-default btn-lg" onclick="seleccionaAsiento()" >Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
-					</div>
-				</div>
+
 				
 			</form>
 		</div>
