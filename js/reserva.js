@@ -114,4 +114,28 @@ function loadBarShow(){
 
 function seleccionaAsiento(){
 	
-}
+	var ida_y_vuelta=0;//Por defecto es solo un vuelo de ida
+	
+	//Primero pregunto si se seleccionó algún vuelo de ida
+	if(!$("input[name=radVueloIda]:checked").val()) {
+		alert("No seleccionó ningún vuelo de ida.");
+		return(0);
+	}//End if selecciono vuelo de ida
+	
+	//Luego pregunto si esta creado el radio de vuelos de vuelta
+	if($("input[name=radVueloVuelta]").val()) {
+		//Como es un vuelo de ida y vuelta pregunto si se seleccionó el vuelo de vuelta
+		if(!$("input[name=radVueloVuelta]:checked").val()) {
+			alert("No seleccionó ningún vuelo de vuelta.");
+			return(0);
+		}//End if selecciono vuelo de vuelta
+		//Le aviso que es un vuelo de ida y vuelta
+		ida_y_vuelta=1;
+	}//End if existe radio de vuelta
+	
+	//Luego de pasar las validaciones genero las variables necesarias y envio el form
+	$("#frmVuelos").append("<input type='hidden' name='htipoVuelo' value='"+ida_y_vuelta+"' />");
+	//alert("radVueloIda: "+$('input:radio[name=radVueloIda]:checked').val());
+	//alert("radVueloVuelta: "+$('input:radio[name=radVueloVuelta]:checked').val());
+	$("#frmVuelos").submit();
+}//End seleccionaAsiento

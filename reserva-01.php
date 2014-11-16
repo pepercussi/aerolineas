@@ -1,13 +1,13 @@
 <?php require_once('cfg/core.php') ?>
 <?php
-$Aeropuerto = new Aeropuertos();
+//$Aeropuerto = new Aeropuertos();
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ES">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Aerolineas - Reservas - B&uacute;squeda de Vuelos</title>
+		<title>Aerolineas - Reservas - Carga de datos y selecci&oacute;n de asiento</title>
 		<!-- START ESTILOS -->
 		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css"><!-- Bootstrap -->
 		<link rel="stylesheet" href="lib/jquery-ui-1.11.2/jquery-ui.css"><!-- Jquery UI -->
@@ -34,7 +34,7 @@ $Aeropuerto = new Aeropuertos();
 		
 		<div id='contenedorPrincipal' class="container maincont">
 			<div class="row">
-				<div class="col-md-12 col-xs-12"><h1>Reserve su vuelo</h1></div>
+				<div class="col-md-12 col-xs-12"><h1>Datos del pasajero</h1></div>
 			</div>
 			<div class="row separador01"></div>
 			<form id="frmVuelos" action="reserva-01.php" method="post" role="form" class="form-inline">
