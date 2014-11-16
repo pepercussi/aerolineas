@@ -25,7 +25,7 @@ $Aeropuerto = new Aeropuertos();
 	
 	<body>
 		<!-- START LOAD BLOCK -->
-		<?php include("load_block.php") ; ?>
+		<?php include("load_block.php"); ?>
 		<!-- END LOAD BLOCK -->
 		
 		<!-- START NAV BAR -->
@@ -96,9 +96,10 @@ $Aeropuerto = new Aeropuertos();
 						
 					</div>
 				</div>
-				<div class="row separador01">
+				<div class="row separador01"></div>
+				<div class="row">
 					<div class="col-md-12 col-xs-12 text-center hidden" id="contBtnSiguiente">
-						<button type="button" class="btn btn-default btn-lg" onclick="siguienteReserva()" >Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+						<button type="button" class="btn btn-default btn-lg" onclick="seleccionaAsiento()" >Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></button>
 					</div>
 				</div>
 				

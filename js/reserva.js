@@ -112,6 +112,6 @@ function loadBarShow(){
 	$("#load00").css("display", "block");
 }
 
-function siguienteReserva(){
+function seleccionaAsiento(){
 	
 }

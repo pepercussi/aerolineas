@@ -20,7 +20,7 @@ foreach($arrPath as $ap){
 	    </div>
 	    <div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-		        <li <?php if($direccionActual=="reserva.php"){echo "class='active'";}?>><a href="#">Reservar</a></li>
+		        <li <?php if($direccionActual=="reserva-00.php"){echo "class='active'";}?>><a href="reserva-00.php">Reservar</a></li>
 		        <li <?php if($direccionActual=="pago.php"){echo "class='active'";}?>><a href="#">Pagar</a></li>
 		        <li <?php if($direccionActual=="checkin.php"){echo "class='active'";}?>><a href="#">Check-in</a></li>
 	      	</ul>
