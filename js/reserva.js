@@ -101,7 +101,6 @@ function habilitaFechaRegreso(){
 	}//end if
 }//End function habilitaFechaRegreso
 
-
 function loadBarHide(){
 	$("#load00").css("display", "none"); 
 	$("#load00").css("position", "absolute");
@@ -113,6 +112,39 @@ function loadBarShow(){
 	$("#load00").css("top", "0px");
 	$("#load00").css("display", "block");
 }
+
+function seleccionaAsiento(){
+	//Controlo que se hallan cargado los datos del form
+	var dni=$("#txtDni").val();
+	var f_nac=$("#txtFechaNacimiento").val();
+	var nombre=$("#txtNombre").val();
+	var apellido=$("#txtApellido").val();
+	var correo=$("#txtCorreo").val();
+	
+	if(dni==''||f_nac==''||nombre==''||apellido==''||correo==''){
+		alert("ATENCION: Para continuar debe completar todos los campos.");
+		return(0);
+	}//End control campos vacios
+	
+	if(correo.indexOf('@', 0) == -1 || correo.indexOf('.', 0) == -1){
+            alert('El correo electrónico introducido no es correcto.');
+            return(0);
+	}//End control correo
+	
+	//Si está todo ok bloqueo los inputs
+	$("#txtDni").attr("disabled", "disabled");
+	$("#txtFechaNacimiento").attr("disabled", "disabled");
+	$("#txtNombre").attr("disabled", "disabled");
+	$("#txtApellido").attr("disabled", "disabled");
+	$("#txtCorreo").attr("disabled", "disabled");
+	
+	$("#dibujoAvion").removeClass("hidden");
+
+	
+	
+	alert("Todo ok");
+	
+}//End method seleccionaAsiento
 
 function siguientePaso(){
 	
