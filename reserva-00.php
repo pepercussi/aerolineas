@@ -33,6 +33,16 @@ $Aeropuerto = new Aeropuertos();
 		<!-- END NAV BAR -->
 		
 		<div id='contenedorPrincipal' class="container maincont">
+			<?php 
+			if(isset($_GET['errorMsj'])){
+				$msjCode=$_GET['errorMsj'];
+				if($msjCode==0){
+					echo "<div class='row maincont'>";
+						echo "<div class='col-md-12 col-xs-12 text-center'><p class='alert-warning'><span class='glyphicon glyphicon-warning-sign'></span>&nbsp;Ha ocurrido un error, por favor seleccione un vuelo nuevamente.</p></div>";
+					echo "</div>";
+				}//End if
+			}//End if
+			?>
 			<div class="row">
 				<div class="col-md-12 col-xs-12"><h1>Reserve su vuelo</h1></div>
 			</div>

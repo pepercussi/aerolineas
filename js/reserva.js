@@ -114,6 +114,11 @@ function loadBarShow(){
 }
 
 function seleccionaAsiento(){
+	
+	var tipoVuelo = $("#hTipoVuelo").val();
+	var codVueloIda = $("#hCodVueloIda").val();
+	var codVueloVuelta = $("#hCodVueloVuelta").val();
+
 	//Controlo que se hallan cargado los datos del form
 	var dni=$("#txtDni").val();
 	var f_nac=$("#txtFechaNacimiento").val();
@@ -138,11 +143,16 @@ function seleccionaAsiento(){
 	$("#txtApellido").attr("disabled", "disabled");
 	$("#txtCorreo").attr("disabled", "disabled");
 	
-	$("#dibujoAvion").removeClass("hidden");
-
+	//Muestro el dibujo del avion de ida
+	$("#dibujoAvionIda").removeClass("hidden");
+	//cargo los asientos del avion de ida
+	$("#contAsientosIda").load();
+	//Si es un vuelo de ida y vuelta muestro el avion de vuelta
+	if(tipoVuelo==1){
+		$("#dibujoAvionVuelta").removeClass("hidden");
+		//cargo los asientos del avion de vuelta
+	}//End if
 	
-	
-	alert("Todo ok");
 	
 }//End method seleccionaAsiento
 
@@ -168,7 +178,7 @@ function siguientePaso(){
 	}//End if existe radio de vuelta
 	
 	//Luego de pasar las validaciones genero las variables necesarias y envio el form
-	$("#frmVuelos").append("<input type='hidden' name='htipoVuelo' value='"+ida_y_vuelta+"' />");
+	$("#frmVuelos").append("<input type='hidden' name='hTipoVuelo' value='"+ida_y_vuelta+"' />");
 	//alert("radVueloIda: "+$('input:radio[name=radVueloIda]:checked').val());
 	//alert("radVueloVuelta: "+$('input:radio[name=radVueloVuelta]:checked').val());
 	$("#frmVuelos").submit();

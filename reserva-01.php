@@ -1,5 +1,18 @@
 <?php require_once('cfg/core.php') ?>
 <?php
+//Controlo que esxista el tipo de vuelo
+if(!isset($_POST['hTipoVuelo'])){
+	header("location: reserva-00.php?errorMsj=0");
+}//End if
+
+$tipoVuelo=$_POST['hTipoVuelo'];
+$codVueloIda=$_POST['radVueloIda'];
+$codVueloVuelta=0;
+if($tipoVuelo==1){
+	$codVueloVuelta=$_POST['radVueloVuelta'];
+}
+
+
 //$Aeropuerto = new Aeropuertos();
 
 ?>
@@ -19,6 +32,8 @@
 		<script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script><!-- Bootstrap -->
 		<script type="text/javascript" src="lib/jquery-ui-1.11.2/jquery-ui.js"></script><!-- Jquery UI -->
 		<script type="text/javascript" src="js/reserva.js"></script><!-- Scripts de esta opcion -->
+		<script type="text/javascript">
+		</script><!-- Scripts de esta opcion -->
 		<!-- END SCRIPTS -->
 
 	</head>
@@ -38,6 +53,10 @@
 			</div>
 			<div class="row separador01"></div>
 			<form id="frmVuelos" action="reserva-01.php" method="post" role="form" class="form-inline">
+				<input type="hidden" id="hTipoVuelo" name="hTipoVuelo" value="<?php echo $tipoVuelo;?>" />
+				<input type="hidden" id="hCodVueloIda" name="hCodVueloIda" value="<?php echo $codVueloIda;?>" />
+				<input type="hidden" id="hCodVueloVuelta" name="hCodVueloIda" value="<?php echo $codVueloVuelta;?>" />
+				
 				<div class="row rowFiltro00">
 					<div class="col-md-4 col-xs-12"></div>
 					<div class="col-md-2 col-xs-12"><label>DNI:</label></div>
@@ -80,10 +99,26 @@
 				<div class="row separador01"></div>
 				
 				<!-- Ahora viene el dibujo del avion -->
-				<div id="dibujoAvion" class="row rowFiltro00 hidden">
-					<div class="col-md-4 text-right"><img class="img-responsive hidden-xs" src="media/img/wing_left.png" /></div>
-					<div class="col-md-4"></div>
-					<div class="col-md-4 text-left"><img class="img-responsive hidden-xs" src="media/img/wing_right.png" /></div>
+				<div id="dibujoAvionIda" class="row rowFiltro00 hidden">
+					<div class="row rowFiltro00">
+						<div class="col-md-12 col-xs-12"><h3>Vuelo Ida</h3></div>
+					</div>
+					<div class="row rowFiltro00">
+						<div class="col-md-4 hidden-xs text-right"><img class="img-responsive" src="media/img/wing_left.png" /></div>
+						<div class="col-md-4 col-xs-12" id="contAsientosIda"></div>
+						<div class="col-md-4 hidden-xs text-left"><img class="img-responsive" src="media/img/wing_right.png" /></div>
+					</div>
+				</div>
+
+				<div id="dibujoAvionVuelta" class="row rowFiltro00 hidden">
+					<div class="row rowFiltro00">
+						<div class="col-md-12 col-xs-12"><h3>Vuelo Vuelta</h3></div>
+					</div>
+					<div class="row rowFiltro00">
+						<div class="col-md-4 hidden-xs text-right"><img class="img-responsive" src="media/img/wing_left.png" /></div>
+						<div class="col-md-4 col-xs-12" id="contAsientosVuelta"></div>
+						<div class="col-md-4 hidden-xs text-left"><img class="img-responsive" src="media/img/wing_right.png" /></div>
+					</div>
 				</div>
 			</form>
 		</div>
