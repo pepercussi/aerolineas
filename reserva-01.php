@@ -81,9 +81,9 @@
 				
 				<!-- Ahora viene el dibujo del avion -->
 				<div id="dibujoAvion" class="row rowFiltro00 hidden">
-					<div class="col-md-4 text-right"><img class="img-responsive" src="media/img/wing_left.png" /></div>
+					<div class="col-md-4 text-right"><img class="img-responsive hidden-xs" src="media/img/wing_left.png" /></div>
 					<div class="col-md-4"></div>
-					<div class="col-md-4 text-left"><img class="img-responsive" src="media/img/wing_right.png" /></div>
+					<div class="col-md-4 text-left"><img class="img-responsive hidden-xs" src="media/img/wing_right.png" /></div>
 				</div>
 			</form>
 		</div>
