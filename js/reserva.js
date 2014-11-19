@@ -143,6 +143,7 @@ function seleccionaAsiento(){
 	$("#txtApellido").attr("disabled", "disabled");
 	$("#txtCorreo").attr("disabled", "disabled");
 	$("#btnSeleccionaAsiento").addClass("hidden");
+	$("#contBtnReservaPasaje").removeClass("hidden");
 	
 	//Muestro la barra de carga
 	loadBarShow();

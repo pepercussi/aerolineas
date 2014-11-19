@@ -90,7 +90,7 @@ if($tipoVuelo==1){
 					
 				<div class="row rowFiltro00">
 					<div class="col-md-5 col-xs-12"></div>
-					<div class="col-md-2 col-xs-12">
+					<div class="col-md-2 col-xs-12 text-center">
 						<button type="button" id="btnSeleccionaAsiento" class="btn btn-default btn-lg" onclick="seleccionaAsiento()" >Seleccionar Asiento <span class="glyphicon glyphicon-plane"></span></button>
 					</div>
 					<div class="col-md-5 col-xs-12"></div>
@@ -100,26 +100,52 @@ if($tipoVuelo==1){
 				
 				<!-- Ahora viene el dibujo del avion -->
 				<div id="dibujoAvionIda" class="row rowFiltro00 hidden">
-					<div class="row rowFiltro00">
-						<div class="col-md-12 col-xs-12"><h3>Vuelo Ida</h3></div>
-					</div>
-					<div class="row rowFiltro00">
-						<div class="col-md-4 hidden-xs text-right"><img class="img-responsive" src="media/img/wing_left.png" /></div>
-						<div class="col-md-4 col-xs-12" id="contAsientosIda"></div>
-						<div class="col-md-4 hidden-xs text-left"><img class="img-responsive" src="media/img/wing_right.png" /></div>
+					<div class="col-md-12 col-xs-12">
+						<div class="row rowFiltro00">
+							<div class="col-md-5 hidden-xs"></div>
+							<div class="col-md-2 col-xs-12 text-center"><p class="bg-info">Primera Clase</p></div>
+							<div class="col-md-5 hidden-xs"></div>
+						</div>
+						<div class="row rowFiltro00">
+							<div class="col-md-5 hidden-xs"></div>
+							<div class="col-md-2 col-xs-12 text-center"><p class="bg-success">Ejecutivo</p></div>
+							<div class="col-md-5 hidden-xs"></div>
+						</div>
+						<div class="row rowFiltro00">
+							<div class="col-md-5 hidden-xs"></div>
+							<div class="col-md-2 col-xs-12 text-center"><p class="bg-danger">No Disponible</p></div>
+							<div class="col-md-5 hidden-xs"></div>
+						</div>
+						<div class="row rowFiltro00">
+							<div class="col-md-12 col-xs-12"><h3>Selecci&oacute;n de asientos para el vuelo de ida</h3></div>
+						</div>
+						<div class="row rowFiltro00">
+							<div class="col-md-4 hidden-xs text-right"><img class="img-responsive" src="media/img/wing_left.png" /></div>
+							<div class="col-md-4 col-xs-12" id="contAsientosIda"></div>
+							<div class="col-md-4 hidden-xs text-left"><img class="img-responsive" src="media/img/wing_right.png" /></div>
+						</div>
 					</div>
 				</div>
 
 				<div id="dibujoAvionVuelta" class="row rowFiltro00 hidden">
-					<div class="row rowFiltro00">
-						<div class="col-md-12 col-xs-12"><h3>Vuelo Vuelta</h3></div>
-					</div>
-					<div class="row rowFiltro00">
-						<div class="col-md-4 hidden-xs text-right"><img class="img-responsive" src="media/img/wing_left.png" /></div>
-						<div class="col-md-4 col-xs-12" id="contAsientosVuelta"></div>
-						<div class="col-md-4 hidden-xs text-left"><img class="img-responsive" src="media/img/wing_right.png" /></div>
+					<div class="col-md-12 col-xs-12">
+						<div class="row rowFiltro00">
+							<div class="col-md-12 col-xs-12"><h3>Selecci&oacute;n de asientos para el vuelo de vuelta</h3></div>
+						</div>
+						<div class="row rowFiltro00">
+							<div class="col-md-4 hidden-xs text-right"><img class="img-responsive" src="media/img/wing_left.png" /></div>
+							<div class="col-md-4 col-xs-12" id="contAsientosVuelta"></div>
+							<div class="col-md-4 hidden-xs text-left"><img class="img-responsive" src="media/img/wing_right.png" /></div>
+						</div>
 					</div>
 				</div>
+				
+				<div id="contBtnReservaPasaje" class="row rowFiltro00 hidden">
+					<div class="col-md-12 col-xs-12 text-center">
+						<button type="button" id="btnSeleccionaAsiento" class="btn btn-default btn-lg" onclick="reservaPasaje()" >Reservar Pasaje <span class="glyphicon glyphicon-briefcase"></span></button>
+					</div>
+				</div>
+				
 			</form>
 		</div>
 	</body>

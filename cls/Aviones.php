@@ -16,14 +16,19 @@ class Aviones{
 	public function getAsientosLibresByCodVuelo($codigoVuelo, $tipoVuelo){
 		//Primero obtenco elcodigo de avion
 		$this->codigoAvion = $this->getCodigoAvionByCodVuelo($codigoVuelo);
-		
+		$idRad=$nameRad="";
+		if($tipoVuelo=="i"){
+			$idRad=$nameRad="radAsientoIda";
+		}else{
+			$idRad=$nameRad="radAsientoVuelta";
+		}
 		$Reserva = new Reservas();
 		
 		echo "<table class='table'>";
 			echo "<tbbody>";
-			for ($f=0; $f < 30; $f++) {
+			for ($f=1; $f < 30; $f++) {
 				echo "<tr>";
-				for ($c=0; $c < 11; $c++) { 
+				for ($c=1; $c < 11; $c++) { 
 					// Ya en la celda pregunto el número de asiento
 					$nroAsiento = $this->getNroAsiento($this->codigoAvion, $f, $c);
 					$codAsiento = $this->getCodAsiento($this->codigoAvion, $f, $c);
@@ -39,14 +44,14 @@ class Aviones{
 							//El asiento esta libre
 							if($claseAsiento==1){
 								//Si es primera clase
-								echo "<td class='active'>".$nroAsiento."</td>";
+								echo "<td class='text-center'><p class='bg-info img-rounded'>".$nroAsiento."</p><input type='radio' name='".$nameRad."' id='".$idRad."' value='".$codAsiento."'/></td>";
 							}else{
 								//Si es clase ejecutiva
-								echo "<td class='success'>".$nroAsiento."</td>";
+								echo "<td class='text-center'><p class='bg-success img-rounded'>".$nroAsiento."</p><input type='radio' name='".$nameRad."' id='".$idRad."' value='".$codAsiento."'/></td>";
 							}
 						}else{
 							//El asiento esta ocupado
-							echo "<td class='danger'>".$nroAsiento."</td>";
+							echo "<td class='bg-danger text-center'><p>".$nroAsiento."</p></td>";
 						}//End if
 						
 					}//End if
