@@ -91,7 +91,7 @@ if($tipoVuelo==1){
 				<div class="row rowFiltro00">
 					<div class="col-md-5 col-xs-12"></div>
 					<div class="col-md-2 col-xs-12">
-						<button type="button" class="btn btn-default btn-lg" onclick="seleccionaAsiento()" >Seleccionar Asiento <span class="glyphicon glyphicon-plane"></span></button>
+						<button type="button" id="btnSeleccionaAsiento" class="btn btn-default btn-lg" onclick="seleccionaAsiento()" >Seleccionar Asiento <span class="glyphicon glyphicon-plane"></span></button>
 					</div>
 					<div class="col-md-5 col-xs-12"></div>
 				</div>
