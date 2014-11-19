@@ -114,12 +114,17 @@ function loadBarShow(){
 }
 
 function seleccionaAsiento(){
+	
+	var tipoVuelo = $("#hTipoVuelo").val();
+	var codVueloIda = $("#hCodVueloIda").val();
+	var codVueloVuelta = $("#hCodVueloVuelta").val();
+
 	//Controlo que se hallan cargado los datos del form
-	var dni=$("#txtDni").val();
-	var f_nac=$("#txtFechaNacimiento").val();
-	var nombre=$("#txtNombre").val();
-	var apellido=$("#txtApellido").val();
-	var correo=$("#txtCorreo").val();
+	var dni = $("#txtDni").val();
+	var f_nac = $("#txtFechaNacimiento").val();
+	var nombre = $("#txtNombre").val();
+	var apellido = $("#txtApellido").val();
+	var correo = $("#txtCorreo").val();
 	
 	if(dni==''||f_nac==''||nombre==''||apellido==''||correo==''){
 		alert("ATENCION: Para continuar debe completar todos los campos.");
@@ -137,12 +142,39 @@ function seleccionaAsiento(){
 	$("#txtNombre").attr("disabled", "disabled");
 	$("#txtApellido").attr("disabled", "disabled");
 	$("#txtCorreo").attr("disabled", "disabled");
+	$("#btnSeleccionaAsiento").addClass("hidden");
 	
-	$("#dibujoAvion").removeClass("hidden");
-
+	//Muestro la barra de carga
+	loadBarShow();
 	
+	var url = "hAviones.php";
+	var metod = "getAsientosLibresByCodVuelo";
+	//Muestro el dibujo del avion de ida
+	$("#dibujoAvionIda").removeClass("hidden");
+	//cargo los asientos del avion de ida
+	$("#contAsientosIda").load(
+		url,
+		{
+			metodo: metod,
+			t_codVuelo: codVueloIda,
+			t_tipoVuelo: 'i'
+		}
+	);
+	//Si es un vuelo de ida y vuelta muestro el avion de vuelta
+	if(tipoVuelo==1){
+		$("#dibujoAvionVuelta").removeClass("hidden");
+		//cargo los asientos del avion de vuelta
+		$("#contAsientosVuelta").load(
+			url,
+			{
+				metodo: metod,
+				t_codVuelo: codVueloVuelta,
+				t_tipoVuelo: 'v'
+			}
+		);
+	}//End if
 	
-	alert("Todo ok");
+	loadBarHide();
 	
 }//End method seleccionaAsiento
 
@@ -168,7 +200,7 @@ function siguientePaso(){
 	}//End if existe radio de vuelta
 	
 	//Luego de pasar las validaciones genero las variables necesarias y envio el form
-	$("#frmVuelos").append("<input type='hidden' name='htipoVuelo' value='"+ida_y_vuelta+"' />");
+	$("#frmVuelos").append("<input type='hidden' name='hTipoVuelo' value='"+ida_y_vuelta+"' />");
 	//alert("radVueloIda: "+$('input:radio[name=radVueloIda]:checked').val());
 	//alert("radVueloVuelta: "+$('input:radio[name=radVueloVuelta]:checked').val());
 	$("#frmVuelos").submit();
