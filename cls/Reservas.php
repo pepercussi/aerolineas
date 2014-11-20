@@ -30,7 +30,21 @@ class Reservas{
 
 	}//End method
 
-
+	public function getRandomCode($length = 5) {
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++){
+	        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+	    }
+	    return $randomString;
+	}//End method getRandomCode
+	
+	public function insertaReserva($numReserva, $factura, $checkIn, $codAsiento, $codVuelo, $codPasajero){
+		$consulta00="INSERT INTO reserva (num_reserva, factura, checkin, cod_asiento, cod_vuelo, cod_pasajero)
+		VALUES ('".$numReserva."', ".$factura.", ".$checkIn.", ".$codAsiento.", ".$cod_vuelo.", ".$codPasajero.");";
 		
-}// End Class Aviones
+		$this->db->query($consulta00);
+	}//End method insertaReserva
+		
+}// End Class Reservas
 ?>

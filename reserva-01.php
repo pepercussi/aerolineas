@@ -52,10 +52,11 @@ if($tipoVuelo==1){
 				<div class="col-md-12 col-xs-12"><h1>Datos del pasajero</h1></div>
 			</div>
 			<div class="row separador01"></div>
-			<form id="frmVuelos" action="reserva-01.php" method="post" role="form" class="form-inline">
+			<form id="frmVuelos" action="hReserva.php" method="post" role="form" class="form-inline">
+				<input type="hidden" id="metodo" name="metodo" value="grabaReserva" />
 				<input type="hidden" id="hTipoVuelo" name="hTipoVuelo" value="<?php echo $tipoVuelo;?>" />
 				<input type="hidden" id="hCodVueloIda" name="hCodVueloIda" value="<?php echo $codVueloIda;?>" />
-				<input type="hidden" id="hCodVueloVuelta" name="hCodVueloIda" value="<?php echo $codVueloVuelta;?>" />
+				<input type="hidden" id="hCodVueloVuelta" name="hCodVueloVuelta" value="<?php echo $codVueloVuelta;?>" />
 				
 				<div class="row rowFiltro00">
 					<div class="col-md-4 col-xs-12"></div>

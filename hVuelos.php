@@ -29,11 +29,13 @@ if(isset($_POST['metodo'])){
 					echo "</thead>";
 					echo "<tbody>";
 					foreach($arrVuelos as $av){
-						echo "<td>".$av['origen']."</td>";
-						echo "<td>".$av['destino']."</td>";
-						echo "<td>".$av['fecha_salida']."</td>";
-						echo "<td>".$av['fecha_llegada']."</td>";
-						echo "<td class='text-center'><input type='radio' name='radVueloIda' id='radVueloIda' value='".$av['codigo_vuelo']."'></input></td>";
+						echo "<tr>";
+							echo "<td>".$av['origen']."</td>";
+							echo "<td>".$av['destino']."</td>";
+							echo "<td>".$av['fecha_salida']."</td>";
+							echo "<td>".$av['fecha_llegada']."</td>";
+							echo "<td class='text-center'><input type='radio' name='radVueloIda' id='radVueloIda' value='".$av['codigo_vuelo']."'></input></td>";
+						echo "</tr>";
 					}//End foreach
 					echo "</tbody>";
 				echo "</table>";
