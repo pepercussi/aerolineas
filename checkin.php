@@ -34,7 +34,7 @@
 				<div class="col-md-12 col-xs-12"><h1>Realice el Check-in</h1></div>
 			</div>
 			<div class="row separador01"></div>
-			<form id="frmCheckin" action="" method="post" role="form" class="form-inline">
+			<form id="frmCheckin" action="generaQr.php" method="post" role="form" class="form-inline">
 				<div class="row rowFiltro00">
 					<div class="col-md-4 col-xs-12"></div>
 					<div class="col-md-2 col-xs-12"><label>DNI:</label></div>
@@ -56,9 +56,7 @@
 				</div>
 				<div class="row separador01"></div>
 				<div class="row">
-					<div class="col-md-12 col-xs-12 table-responsive" id="contDatosReserva">
-						
-					</div>
+					<div class="col-md-12 col-xs-12 table-responsive" id="contDatosReserva"></div>
 				</div>				
 			</form>
 		</div>

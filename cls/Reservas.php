@@ -96,18 +96,20 @@ class Reservas{
 			echo "<table class='table'>"; //Dibujo tabla con los resultados de la reserva
 					echo "<thead>";
 						echo "<tr>";
+							echo "<th> Codigo de vuelo </th>";
 							echo "<th> Nombre y apellido </th>";
 							echo "<th> Origen </th>";
 							echo "<th> Fecha de salida </th>";
 							echo "<th> Destino </th>";
 							echo "<th> Fecha de llegada </th>";
-							echo "<th> Codigo de vuelo </th>";
 						echo "</tr>";
 					echo "</thead>";
-			foreach ($result00 as $r00) {
-				
 					echo "<tbbody>";
+			foreach ($result00 as $r00) {				
 						echo "<tr>";
+							echo "<td>";
+								echo $r00['codReserva'];
+							echo "</td>";
 							echo "<td>";
 								echo $r00['nombre']." ".$r00['apellido'];
 							echo "</td>";
@@ -123,16 +125,15 @@ class Reservas{
 							echo "<td>";
 								echo $r00['fecha_llegada'];
 							echo "</td>";
-							echo "<td>";
-								echo $r00['codReserva'];
-							echo "</td>";
 						echo "</tr>";
-					echo "</tbody>";
-				echo "</table>";	
-								
 			}//end foreach
+			echo "</tbody>";
+			echo "</table>";
+			echo "<div class='col-md-5'></div>";
+			echo "<div class='col-md-2'><button type='submit' class='btn btn-primary btn-lg'>Confirmar check-in<span class='glyphicon glyphicon-plane' aria-hidden='true'></span></button></div>";	
+			echo "<div class='col-md-5'></div>";
 		}else{
-			return 0;
+			echo "<div class='alert alert-info text-center' role='alert'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>No se encontraron reservas referidas al codigo ingresado</div>";
 		}//End if
 	}//End method getDatosReserva
 

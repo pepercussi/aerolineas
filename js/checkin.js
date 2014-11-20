@@ -5,10 +5,12 @@ function comprobarDatosReserva(){
 	if (dni==''||codigo==''){
 		alert("ATENCION: Para continuar debe completar todos los campos.");
 		return(0);
-	}//End control campos vacios
-	//Si está todo ok bloqueo los inputs
-	$("#txtDni").attr("disabled", "disabled");
-	$("#txtCodReserva").attr("disabled","disabled");
+	}else{
+		if(isNaN(dni)){
+			alert ("Ingrese un DNI valido");
+			return (0);
+		}
+	}//End control campos vacios y DNI valido
 	//Muestro la barra de carga
 	loadBarShow();
 	var url = "hReserva.php";
