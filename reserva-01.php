@@ -32,8 +32,6 @@ if($tipoVuelo==1){
 		<script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script><!-- Bootstrap -->
 		<script type="text/javascript" src="lib/jquery-ui-1.11.2/jquery-ui.js"></script><!-- Jquery UI -->
 		<script type="text/javascript" src="js/reserva.js"></script><!-- Scripts de esta opcion -->
-		<script type="text/javascript">
-		</script><!-- Scripts de esta opcion -->
 		<!-- END SCRIPTS -->
 
 	</head>

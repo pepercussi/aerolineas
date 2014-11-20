@@ -11,6 +11,18 @@ class Reservas{
 		$this->db = null;
 	}
 	
+	public function checkReserva($numReserva, $dniPasajero){
+		$consulta00="SELECT cod FROM reserva WHERE num_reserva='".$numReserva."' AND cod_pasajero=".$dniPasajero.";";
+		$result00=$this->db->query($consulta00);
+		//echo "</br>".$consulta00."</br>";
+		if(count($result00)>0){
+			return 1;
+		}else{
+			return 0;
+		}
+		
+	}//End method checkReserva
+	
 	public function getCodigoReservaByVueloAndAsiento($codigoVuelo, $codigoAsiento){
 		$consulta00="SELECT r.cod as cod_reserva
 		FROM reserva r
@@ -29,7 +41,6 @@ class Reservas{
 		}//End if
 
 	}//End method
-
 
 	public function getRandomCode($length = 5) {
 	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
