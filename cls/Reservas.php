@@ -53,8 +53,8 @@ class Reservas{
 	
 	public function insertaReserva($numReserva, $factura, $checkIn, $codAsiento, $codVuelo, $codPasajero){
 		$consulta00="INSERT INTO reserva (num_reserva, factura, checkin, cod_asiento, cod_vuelo, cod_pasajero)
-		VALUES ('".$numReserva."', ".$factura.", ".$checkIn.", ".$codAsiento.", ".$cod_vuelo.", ".$codPasajero.");";
-		
+		VALUES ('".$numReserva."', '".$factura."', ".$checkIn.", ".$codAsiento.", ".$codVuelo.", ".$codPasajero.");";
+		//echo "</br>".$consulta00."</br>";
 		$this->db->query($consulta00);
 	}//End method insertaReserva
 
