@@ -11,6 +11,30 @@ class Reservas{
 		$this->db = null;
 	}
 	
+	public function checkCapacidadByVuelo($codVuelo){
+		$Avion = new Aviones();
+		$Vuelo = new Vuelos();
+		
+		//Primero obtengo el codigo del avion
+		$codAvion = $Vuelo->getCodAvionByVuelo($codVuelo);
+		
+		//Luego obtengo la cantidad de asientos del avion
+		$cantAsientos = $Avion->getCantidadAsientosByCodAvion($codAvion);
+		
+		//Por ultimo obtengo la cantidad de asientos ocupados del vuelo y comparo con la cantidad total
+		$cantReservas = $this->getCantReservasByCodVuelo($codVuelo);
+		
+		if(($cantAsientos-$cantReservas)>0){
+			//Hay asientos
+			return 1;
+			//return 0;
+		}else{
+			//No hay asientos
+			return 0;
+		}
+
+	}//End method checkCapacidadByVuelo
+	
 	public function checkReserva($numReserva, $dniPasajero){
 		$consulta00="SELECT cod FROM reserva WHERE num_reserva='".$numReserva."' AND cod_pasajero=".$dniPasajero.";";
 		$result00=$this->db->query($consulta00);
@@ -22,6 +46,24 @@ class Reservas{
 		}
 		
 	}//End method checkReserva
+	
+	public function getCantReservasByCodVuelo($codVuelo){
+		$consulta00="SELECT count(cod) as Cantidad
+		FROM reserva
+		WHERE cod_vuelo=".$codVuelo."
+		;";
+		
+		$result00=$this->db->query($consulta00);
+		
+		if(count($result00)>0){
+			foreach($result00 as $r00){
+				return $r00['Cantidad'];
+			}//End foreach
+		}else{
+			return 0;
+		}//End if
+
+	}//End method getCantReservasByCodVuelo
 	
 	public function getCodigoReservaByVueloAndAsiento($codigoVuelo, $codigoAsiento){
 		$consulta00="SELECT r.cod as cod_reserva

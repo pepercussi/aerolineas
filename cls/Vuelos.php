@@ -47,5 +47,23 @@ class Vuelos{
 		
 	}//End getArrayAeropuertos
 
+	public function getCodAvionByVuelo($codVuelo){
+		$consulta00="SELECT cod_asignado_a as cod_avion
+		FROM vuelo
+		WHERE cod=".$codVuelo.";";
+		
+		$result00=$this->db->query($consulta00);
+		
+		if(count($result00)>0){
+			foreach($result00 as $r00){
+				return $r00['cod_avion'];
+			}//End foreach
+		}else{
+			return 0;
+		}//End if
+		
+		
+	}//End method getCodAvionByVuelo
+	
 }// End Class Vuelos
 ?>

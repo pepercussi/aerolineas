@@ -90,7 +90,8 @@ if($tipoVuelo==1){
 				<div class="row rowFiltro00">
 					<div class="col-md-5 col-xs-12"></div>
 					<div class="col-md-2 col-xs-12 text-center">
-						<button type="button" id="btnSeleccionaAsiento" class="btn btn-default btn-lg" onclick="seleccionaAsiento()" >Seleccionar Asiento <span class="glyphicon glyphicon-plane"></span></button>
+						<button type="button" id="btnSeleccionaAsiento" class="btn btn-default btn-lg" onclick="reservaPasaje()" >Reservar Pasaje <span class="glyphicon glyphicon-briefcase"></span></button>
+						<!-- <button type="button" id="btnSeleccionaAsiento" class="btn btn-default btn-lg" onclick="seleccionaAsiento()" >Seleccionar Asiento <span class="glyphicon glyphicon-plane"></span></button> -->
 					</div>
 					<div class="col-md-5 col-xs-12"></div>
 				</div>
@@ -141,7 +142,7 @@ if($tipoVuelo==1){
 				
 				<div id="contBtnReservaPasaje" class="row rowFiltro00 hidden">
 					<div class="col-md-12 col-xs-12 text-center">
-						<button type="button" id="btnSeleccionaAsiento" class="btn btn-default btn-lg" onclick="reservaPasaje()" >Reservar Pasaje <span class="glyphicon glyphicon-briefcase"></span></button>
+						<button type="button" id="btnSeleccionaAsiento" class="btn btn-default btn-lg" onclick="reservaPasajeOld()" >Reservar Pasaje <span class="glyphicon glyphicon-briefcase"></span></button>
 					</div>
 				</div>
 				

@@ -114,6 +114,86 @@ function loadBarShow(){
 }
 
 function reservaPasaje(){
+	//Obtengo las variables
+	var tipoVuelo = $("#hTipoVuelo").val();
+	var codVueloIda = $("#hCodVueloIda").val();
+	var codVueloVuelta = $("#hCodVueloVuelta").val();
+	var dni = $("#txtDni").val();
+	var f_nac = $("#txtFechaNacimiento").val();
+	var nombre = $("#txtNombre").val();
+	var apellido = $("#txtApellido").val();
+	var correo = $("#txtCorreo").val();
+
+	var url = "hReserva.php";
+	
+	loadBarShow();
+	
+	//Controlo los datos del form
+	if(dni==''||f_nac==''||nombre==''||apellido==''||correo==''){
+		alert("ATENCION: Para continuar debe completar todos los campos.");
+		return(0);
+	}//End control campos vacios
+	
+	if(correo.indexOf('@', 0) == -1 || correo.indexOf('.', 0) == -1){
+            alert('El correo electrónico introducido no es correcto.');
+            return(0);
+	}//End control correo
+	
+
+	//Chequeo si entra en lista de espera
+	//Primero el de ida
+	$.post(
+		url,
+		{
+			metodo:"checkCapacidadByVuelo",
+			vuelo: codVueloIda
+		},
+		function(result){
+			//alert("result ida: "+result);
+			if(result==0){
+				//Avion vacio
+				var confirmacion = confirm("Actualmente no hay capacidad en el vuelo de ida. Desea reservar de todos modos e ingresar a la lista de espera?");
+				if(confirmacion!=true){
+					loadBarHide();
+					return(0);
+				}//Si igualmente se quiere anotar sigo
+			}//End if
+			//Grabo lo reserva si es un vuelo solo de ida
+			if(tipoVuelo!=1){setTimeout($("#frmVuelos").submit(),3000);}
+		}//End callback
+	);
+	
+	//Luego el de vuelta
+	if(tipoVuelo==1){
+		$.post(
+			url,
+			{
+				metodo:"checkCapacidadByVuelo",
+				vuelo: codVueloVuelta
+			},
+			function(result){
+				//alert("result vuelta: "+result);
+				if(result==0){
+					//Avion vacio
+					var confirmacion = confirm("Actualmente no hay capacidad en el vuelo de vuelta. Desea reservar de todos modos e ingresar a la lista de espera?");
+					if(confirmacion!=true){
+						loadBarHide();
+						return(0);
+					}//Si igualmente se quiere anotar sigo
+				}//End if
+				//Grabo lo reserva
+				setTimeout($("#frmVuelos").submit(),3000);
+			}//End callback
+		);
+	}//End if
+	
+	
+	
+	
+	
+}//End function reservaPasaje
+
+function reservaPasajeOld(){
 	//Controlo que se hallan seleccionado los asientos
 	if(!$("input[name=radAsientoIda]:checked").val()){//Si no esta seleccionado el vuelo de ida
 		alert("Por favor seleccione un asiento en el vuelo de ida.");
@@ -135,7 +215,7 @@ function reservaPasaje(){
 	$("#txtApellido").removeAttr("disabled");
 	$("#txtCorreo").removeAttr("disabled");
 	$("#frmVuelos").submit();
-}//End function reservaPasaje
+}//End function reservaPasajeOld
 
 function seleccionaAsiento(){
 	
