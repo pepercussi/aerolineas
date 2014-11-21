@@ -24,14 +24,18 @@ class Reservas{
 		//Por ultimo obtengo la cantidad de asientos ocupados del vuelo y comparo con la cantidad total
 		$cantReservas = $this->getCantReservasByCodVuelo($codVuelo);
 		
-		if(($cantAsientos-$cantReservas)>0){
+		$diferencia=$cantAsientos-$cantReservas;
+		if($diferencia>0){
 			//Hay asientos
-			return 1;
-			//return 0;
-		}else{
-			//No hay asientos
 			return 0;
+		}elseif($diferencia>(-11)){
+			//No hay asientos pero se puede entrar a lista de espera
+			return 1;
+		}else{
+			//No hay asientos y no se puede entrar a lista de espera
+			return 2;
 		}
+		
 
 	}//End method checkCapacidadByVuelo
 	

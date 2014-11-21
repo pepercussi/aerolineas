@@ -150,13 +150,18 @@ function reservaPasaje(){
 		},
 		function(result){
 			//alert("result ida: "+result);
-			if(result==0){
+			if(result==1){
 				//Avion vacio
 				var confirmacion = confirm("Actualmente no hay capacidad en el vuelo de ida. Desea reservar de todos modos e ingresar a la lista de espera?");
 				if(confirmacion!=true){
 					loadBarHide();
 					return(0);
 				}//Si igualmente se quiere anotar sigo
+			}//End if
+			if(result==2){
+				alert("No es posible reservar en el vuelo de ida. La capacidad del mismo ha sido excedida. Por favor regrese a la selección de vuelos para elegir otro.");
+				loadBarHide();
+				return(0);
 			}//End if
 			//Grabo lo reserva si es un vuelo solo de ida
 			if(tipoVuelo!=1){setTimeout($("#frmVuelos").submit(),3000);}
@@ -173,13 +178,18 @@ function reservaPasaje(){
 			},
 			function(result){
 				//alert("result vuelta: "+result);
-				if(result==0){
+				if(result==1){
 					//Avion vacio
 					var confirmacion = confirm("Actualmente no hay capacidad en el vuelo de vuelta. Desea reservar de todos modos e ingresar a la lista de espera?");
 					if(confirmacion!=true){
 						loadBarHide();
 						return(0);
 					}//Si igualmente se quiere anotar sigo
+				}//End if
+				if(result==2){
+					alert("No es posible reservar en el vuelo de vuelta. La capacidad del mismo ha sido excedida. Por favor regrese a la selección de vuelos para elegir otro.");
+					loadBarHide();
+					return(0);
 				}//End if
 				//Grabo lo reserva
 				setTimeout($("#frmVuelos").submit(),3000);
