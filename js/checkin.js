@@ -11,6 +11,7 @@ function comprobarDatosReserva(){
 			return (0);
 		}
 	}//End control campos vacios y DNI valido
+	
 	//Muestro la barra de carga
 	loadBarShow();
 	var url = "hReserva.php";

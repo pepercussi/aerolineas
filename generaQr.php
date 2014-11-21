@@ -1,6 +1,6 @@
 <?php require_once('cfg/core.php')?>
 <?php 
-$Reserva = new $Reservas();
+$Reserva = new Reservas();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ES">
@@ -44,7 +44,7 @@ $Reserva = new $Reservas();
 							$arrReservas = $Reserva->getArrayReserva($_POST['hDni'],$_POST['hReserva']);
 							foreach($arrReservas as $r00){
 								echo $r00['nombre'];
-							}
+							};
 						?>
 					</div>
 				</div>

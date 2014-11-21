@@ -122,7 +122,6 @@ class Reservas{
 		FROM reserva r
 		INNER JOIN pasajero p on p.dni=r.cod_pasajero
 		INNER JOIN vuelo v on v.cod=r.cod_vuelo
-		INNER JOIN asiento a on a.cod=r.cod_asiento
 		
 		INNER JOIN aeropuerto a1 on a1.cod=v.cod_se_dirige_a
 		INNER JOIN pcia p1 on p1.cod=a1.cod_pcia
@@ -146,10 +145,12 @@ class Reservas{
 				$fechaSegundos = $fechaVuelo-$fechaActual; //diferencia entre fecha de viaje y fecha actual en segundos
 				//Condicion para check-in
 				//Si el check-in no se encuentra realizado
-				if($r00['factura']==NULL){
-					echo "<div class='alert alert-info text-center' role='alert'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>Debe abonar su pasaje antes de realizar el check-in. Ingrese AQUI</div>";
+				if($r00['factura']==0){
+					echo "<div class='alert alert-info text-center' role='alert'>";
+						echo "<span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span> Debe abonar su pasaje antes de realizar el check-in. Para realizar el pago por favor ingrese <a href='pago.php'>AQUI</a>";
+					echo "</div>";
 					return 0;
-				}	
+				}//End if
 				if($r00['checkin']==0){
 					if($fechaSegundos > 7200 && $fechaSegundos < 172800){ //48 hs antes del vuelo y 2 hs previas al despegue
 						echo "<table class='table'>"; //Dibujo tabla con los resultados de la reserva
@@ -166,46 +167,30 @@ class Reservas{
 							echo "<tbbody>";
 							foreach ($result00 as $r00) {				
 									echo "<tr>";
-										echo "<td>";
-											echo $r00['codReserva'];
-										echo "</td>";
-										echo "<td>";
-											echo $r00['nombre']." ".$r00['apellido'];
-										echo "</td>";
-										echo "<td>";
-											echo $r00['origen'];
-										echo "</td>";
-										echo "<td>";
-											echo $r00['fecha_sal'];
-										echo "</td>";
-										echo "<td>";
-											echo $r00['destino'];
-										echo "</td>";
-										echo "<td>";
-											echo $r00['fecha_llegada'];
-										echo "</td>";
+										echo "<td>".$r00['codReserva']."</td>";
+										echo "<td>".$r00['nombre']." ".$r00['apellido']."</td>";
+										echo "<td>".$r00['origen']."</td>";
+										echo "<td>".$r00['fecha_sal']."</td>";
+										echo "<td>".$r00['destino']."</td>";
+										echo "<td>".$r00['fecha_llegada']."</td>";
 									echo "</tr>";
 							}//end foreach
 							echo "</tbody>";
 						echo "</table>";
 						//Almaceno en variables los datos de dni y codigo pasados por POST
 						echo "<input type='hidden' name='hDni' value='".$codDni."' />";
-						echo "<input type='hidden' name='hReserva' value='".$codReserva."' />";			
-						echo "<div class='col-md-5'></div>";
-						echo "<div class='col-md-2'><button type='submit' class='btn btn-primary btn-lg'>Confirmar check-in<span class='glyphicon glyphicon-plane' aria-hidden='true'></span></button></div>";	
-						echo "<div class='col-md-5'></div>";
-						} //End if condicion de horario
+						echo "<input type='hidden' name='hReserva' value='".$codReserva."' />";
+						echo "<div class='col-md-12 col-xs-12 text-center'><button type='submit' class='btn btn-primary btn-lg'>Confirmar check-in<span class='glyphicon glyphicon-plane' aria-hidden='true'></span></button></div>";	
+					} //End if condicion de horario
 					else{
-						echo "<div class='alert alert-danger text-center' role='alert'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>El check-in solo puede efectuarse 48hs antes del vuelo y 2 hs previas al despegue.</br> Por favor, cumpla con estos requisitos.</br> Muchas gracias</div>";
+						echo "<div class='alert alert-danger text-center' role='alert'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span> El check-in solo puede efectuarse 48hs antes del vuelo y 2 hs previas al despegue.</br> Por favor, cumpla con estos requisitos.</br> Muchas gracias</div>";
 					}//End if				
-				}
-				else{
-						echo "<div class='alert alert-info text-center' role='alert'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>El check-in ya ha sido realizado. En caso de requerir nuevamente la tarjeta de embarque, haga clic aqui</div>";
-				}
+				}else{
+						echo "<div class='alert alert-info text-center' role='alert'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span> El check-in ya ha sido realizado. En caso de requerir nuevamente la tarjeta de embarque, haga clic aqui</div>";
+				}//End if chekin
 				return 0;
-			}
-		}
-		else{
+			}//End foreach
+		}else{
 			echo "<div class='alert alert-info text-center' role='alert'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>No se encontraron reservas referidas al codigo ingresado</div>";
 		}//End if
 	}//End method getDatosReserva
