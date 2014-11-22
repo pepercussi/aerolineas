@@ -12,7 +12,7 @@ if(isset($_POST['metodo'])){
 		foreach ($arrReserva as $r00){
 			$apellido = $r00["apellido"];
 			$nombre = $r00["nombre"];
-			//$clase = $r00["clase"];
+			$clase = $r00["clase"];
 		}
 		echo "	<div class='row rowFiltro00'>";
 			echo "	<div class='col-md-1 col-xs-12'></div>";
@@ -27,7 +27,7 @@ if(isset($_POST['metodo'])){
 			echo "	<div class='col-md-2 col-xs-12'><label>DNI:</label></div>";
 			echo "	<div class='col-md-3 col-xs-12'><span>".$codDni."</span></div>";
 			echo "	<div class='col-md-2 col-xs-12'><label>Clase:</label></div>";
-			echo "	<div class='col-md-3 col-xs-12'><span></span></div>";
+			echo "	<div class='col-md-3 col-xs-12'><span>".$clase."</span></div>";
 			echo "	<div class='col-md-1 col-xs-12'></div>";
 		echo " </div>";
 	}//End metodo getDatosPago
