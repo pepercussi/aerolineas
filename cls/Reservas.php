@@ -112,7 +112,7 @@ class Reservas{
 		if(count($result00)>1){$tipoVuelo=1;}//Si hay mas de un resultado es un vuelo de ida y vuelta
 		$flag=0;
 		$vueloIda=$vueloVuelta=0;
-		
+		$claseVuelo=0;
 		
 		if(count($result00)>0){
 			foreach ($result00 as $r00){
@@ -157,6 +157,7 @@ class Reservas{
 									}else{
 										$vueloVuelta=$r00['cod_vuelo'];;
 									}//End if
+									$claseVuelo=$r00["clase"];
 							}//end foreach
 							echo "</tbody>";
 						echo "</table>";
@@ -166,7 +167,7 @@ class Reservas{
 						echo "<input type='hidden' id='hTipoVuelo' name='hTipoVuelo' value='".$tipoVuelo."' />";
 						echo "<input type='hidden' id='hCodVueloIda' name='hCodVueloIda' value='".$vueloIda."' />";
 						echo "<input type='hidden' id='hCodVueloVuelta' name='hCodVueloVuelta' value='".$vueloVuelta."' />";
-												
+						echo "<input type='hidden' id='hCodClase' name='hCodClase' value='".$claseVuelo."' />";						
 						echo "<div class='col-md-12 col-xs-12 text-center'><button id='btnSeleccionaAsiento' type='button' class='btn btn-default btn-lg' onclick='seleccionaAsiento()'>Seleccionar Asientos<span class='glyphicon glyphicon-plane' aria-hidden='true'></span></button></div>";	
 						//echo "<div class='col-md-12 col-xs-12 text-center'><button type='submit' class='btn btn-primary btn-lg'>Confirmar check-in<span class='glyphicon glyphicon-plane' aria-hidden='true'></span></button></div>";	
 					} //End if condicion de horario
@@ -197,7 +198,8 @@ class Reservas{
 		concat(a2.nombre, ' - ', a2.ciudad, ' - ', p2.nombre, ' - ', pa2.nombre) as origen,
 		av.cod as codigo_avion,
 		r.checkin,
-		r.cod_vuelo as cod_vuelo
+		r.cod_vuelo as cod_vuelo,
+		r.clase
 		
 		FROM reserva r
 		INNER JOIN pasajero p on p.dni=r.cod_pasajero

@@ -16,6 +16,7 @@ function comprobarDatosPago(){
 	var url = "hPago.php";
 	var metod = "getDatosPago";
 	//Cargo los datos del vuelo
+	$("#contenedorFiltroPago").addClass("hidden");
 	$("#contDatosPago").removeClass("hidden");
 	$("#contDatosPago").load(
 		url,

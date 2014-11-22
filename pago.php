@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script><!-- Bootstrap -->
 		<script type="text/javascript" src="lib/jquery-ui-1.11.2/jquery-ui.js"></script><!-- Jquery UI -->
 		<script type="text/javascript" src="js/pago.js"></script><!-- Scripts de esta opcion -->
+		<script type="text/javascript" src="js/reserva.js"></script><!-- Scripts de esta opcion -->
 		<!-- END SCRIPTS -->
 
 	</head>
@@ -35,7 +36,7 @@
 			<div class="row">
 				<div class="col-md-12 col-xs-12"><h2>Datos del vuelo</h2></div>
 			</div>
-			<div class="row" id="contenedorFiltro">
+			<div class="row" id="contenedorFiltroPago">
 				<div class="row rowFiltro00">
 					<div class="col-md-4 col-xs-12"></div>
 					<div class="col-md-2 col-xs-12"><label>DNI:</label></div>
@@ -57,22 +58,7 @@
 				</div>
 			</div>
 			<div class="row hidden" id="contDatosPago">
-				<div class="row rowFiltro00">
-					<div class="col-md-1 col-xs-12"></div>
-					<div class="col-md-2 col-xs-12"><label>Apellido y nombre:</label></div>
-					<div class="col-md-3 col-xs-12"><input type="text" name="txtNombreCompleto" /></div>
-					<div class="col-md-2 col-xs-12"><label>Codigo de reserva:</label></div>
-					<div class="col-md-3 col-xs-12"><input type="text" name="txtCodReserva" /></div>
-					<div class="col-md-1 col-xs-12"></div>
-				</div>
-				<div class="row rowFiltro00">
-					<div class="col-md-1 col-xs-12"></div>
-					<div class="col-md-2 col-xs-12"><label>DNI:</label></div>
-					<div class="col-md-3 col-xs-12"><input type="text" name="txtDni" /></div>
-					<div class="col-md-2 col-xs-12"><label>Clase:</label></div>
-					<div class="col-md-3 col-xs-12"><input type="text" name="txtClase" /></div>
-					<div class="col-md-1 col-xs-12"></div>
-				</div>
+				
 			</div>
 		</div>
 	</body>
