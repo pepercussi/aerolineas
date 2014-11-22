@@ -13,6 +13,13 @@ class Aviones{
 		$this->db = null;
 	}
 
+	public function getArrayClases(){
+		$consulta00="SELECT cod, tipo
+		FROM clase;";
+		
+		return $this->db->query($consulta00);
+	}//End method getArrayClases
+
 	public function getAsientosLibresByCodVuelo($codigoVuelo, $tipoVuelo){
 		//Primero obtenco elcodigo de avion
 		$this->codigoAvion = $this->getCodigoAvionByCodVuelo($codigoVuelo);

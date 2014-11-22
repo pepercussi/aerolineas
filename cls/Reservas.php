@@ -105,38 +105,13 @@ class Reservas{
 	}//End method insertaReserva
 
 	public function getDatosReserva($codDni, $codReserva){
-		$consulta00="SELECT
-		p.nombre, 
-		p.apellido, 
-		v.fecha_sal, 
-		v.fecha_llegada,  
-		r.num_reserva as codReserva,	
-		r.factura,	
-		a1.cod as cod_destino,
-		concat(a1.nombre, ' - ', a1.ciudad, ' - ', p1.nombre, ' - ', pa1.nombre) as destino,
-		a2.cod as cod_origen,
-		concat(a2.nombre, ' - ', a2.ciudad, ' - ', p2.nombre, ' - ', pa2.nombre) as origen,
-		av.cod as codigo_avion,
-		r.checkin
 		
-		FROM reserva r
-		INNER JOIN pasajero p on p.dni=r.cod_pasajero
-		INNER JOIN vuelo v on v.cod=r.cod_vuelo
+		$result00=$this->getArrayReserva($codDni, $codReserva);
+		$tipoVuelo=0;
+		if(count($result00)>1){$tipoVuelo=1;}//Si hay mas de un resultado es un vuelo de ida y vuelta
+		$flag=0;
+		$vueloIda=$vueloVuelta=0;
 		
-		INNER JOIN aeropuerto a1 on a1.cod=v.cod_se_dirige_a
-		INNER JOIN pcia p1 on p1.cod=a1.cod_pcia
-		INNER JOIN pais pa1 on pa1.cod=p1.cod_pais
-		
-		INNER JOIN aeropuerto a2 on a2.cod=v.cod_parte_de
-		INNER JOIN pcia p2 on p2.cod=a2.cod_pcia
-		INNER JOIN pais pa2 on pa2.cod=p2.cod_pais
-		
-		INNER JOIN avion av on av.cod=v.cod_asignado_a
-		
-		WHERE r.num_reserva='".$codReserva."'
-		AND p.dni=".$codDni."
-		;";
-		$result00=$this->db->query($consulta00);
 		
 		if(count($result00)>0){
 			foreach ($result00 as $r00){
@@ -174,13 +149,25 @@ class Reservas{
 										echo "<td>".$r00['destino']."</td>";
 										echo "<td>".$r00['fecha_llegada']."</td>";
 									echo "</tr>";
+									if($flag==0){
+										//Es el vuelo de ida
+										$vueloIda=$r00['cod_vuelo'];
+										$flag++;
+									}else{
+										$vueloVuelta=$r00['cod_vuelo'];;
+									}//End if
 							}//end foreach
 							echo "</tbody>";
 						echo "</table>";
 						//Almaceno en variables los datos de dni y codigo pasados por POST
-						echo "<input type='hidden' name='hDni' value='".$codDni."' />";
-						echo "<input type='hidden' name='hReserva' value='".$codReserva."' />";
-						echo "<div class='col-md-12 col-xs-12 text-center'><button type='submit' class='btn btn-primary btn-lg'>Confirmar check-in<span class='glyphicon glyphicon-plane' aria-hidden='true'></span></button></div>";	
+						echo "<input type='hidden' id='hDni' name='hDni' value='".$codDni."' />";
+						echo "<input type='hidden' id='hReserva' name='hReserva' value='".$codReserva."' />";
+						echo "<input type='hidden' id='hTipoVuelo' name='hTipoVuelo' value='".$tipoVuelo."' />";
+						echo "<input type='hidden' id='hCodVueloIda' name='hCodVueloIda' value='".$vueloIda."' />";
+						echo "<input type='hidden' id='hCodVueloVuelta' name='hCodVueloVuelta' value='".$vueloVuelta."' />";
+												
+						echo "<div class='col-md-12 col-xs-12 text-center'><button id='btnSeleccionaAsiento' type='button' class='btn btn-default btn-lg' onclick='seleccionaAsiento()'>Seleccionar Asientos<span class='glyphicon glyphicon-plane' aria-hidden='true'></span></button></div>";	
+						//echo "<div class='col-md-12 col-xs-12 text-center'><button type='submit' class='btn btn-primary btn-lg'>Confirmar check-in<span class='glyphicon glyphicon-plane' aria-hidden='true'></span></button></div>";	
 					} //End if condicion de horario
 					else{
 						echo "<div class='alert alert-danger text-center' role='alert'><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span> El check-in solo puede efectuarse 48hs antes del vuelo y 2 hs previas al despegue.</br> Por favor, cumpla con estos requisitos.</br> Muchas gracias</div>";
@@ -195,24 +182,26 @@ class Reservas{
 		}//End if
 	}//End method getDatosReserva
 
-	public function getArrayReserva($hDni,$hReserva){
+	public function getArrayReserva($codDni,$codReserva){
 		$consulta00="SELECT
 		p.nombre, 
 		p.apellido, 
 		v.fecha_sal, 
 		v.fecha_llegada,  
-		r.num_reserva as codReserva,		
+		r.num_reserva as codReserva,	
+		r.factura,	
 		a1.cod as cod_destino,
 		concat(a1.nombre, ' - ', a1.ciudad, ' - ', p1.nombre, ' - ', pa1.nombre) as destino,
 		a2.cod as cod_origen,
 		concat(a2.nombre, ' - ', a2.ciudad, ' - ', p2.nombre, ' - ', pa2.nombre) as origen,
 		av.cod as codigo_avion,
-		r.checkin
+		r.checkin,
+		r.cod_vuelo as cod_vuelo
 		
 		FROM reserva r
 		INNER JOIN pasajero p on p.dni=r.cod_pasajero
 		INNER JOIN vuelo v on v.cod=r.cod_vuelo
-		INNER JOIN asiento a on a.cod=r.cod_asiento
+		LEFT JOIN asiento a on a.cod=r.cod_asiento
 		
 		INNER JOIN aeropuerto a1 on a1.cod=v.cod_se_dirige_a
 		INNER JOIN pcia p1 on p1.cod=a1.cod_pcia
@@ -224,8 +213,10 @@ class Reservas{
 		
 		INNER JOIN avion av on av.cod=v.cod_asignado_a
 		
-		WHERE r.num_reserva='".$hReserva."'
-		AND p.dni=".$hDni."
+		WHERE r.num_reserva='".$codReserva."'
+		AND p.dni=".$codDni."
+		
+		ORDER BY r.cod
 		;";
 		return $this->db->query($consulta00);
 		

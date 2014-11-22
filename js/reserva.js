@@ -123,6 +123,7 @@ function reservaPasaje(){
 	var nombre = $("#txtNombre").val();
 	var apellido = $("#txtApellido").val();
 	var correo = $("#txtCorreo").val();
+	var clase = $("#selClase").val();
 
 	var url = "hReserva.php";
 	
@@ -234,6 +235,7 @@ function seleccionaAsiento(){
 	var codVueloVuelta = $("#hCodVueloVuelta").val();
 
 	//Controlo que se hallan cargado los datos del form
+	/*
 	var dni = $("#txtDni").val();
 	var f_nac = $("#txtFechaNacimiento").val();
 	var nombre = $("#txtNombre").val();
@@ -249,15 +251,21 @@ function seleccionaAsiento(){
             alert('El correo electrónico introducido no es correcto.');
             return(0);
 	}//End control correo
+	*/
 	
 	//Si está todo ok bloqueo los inputs
 	$("#txtDni").attr("disabled", "disabled");
+	$("#txtCodReserva").attr("disabled", "disabled");
+	$("#btnCheckin").addClass("hidden");
+	$("#btnSeleccionaAsiento").addClass("hidden");
+	/*
 	$("#txtFechaNacimiento").attr("disabled", "disabled");
 	$("#txtNombre").attr("disabled", "disabled");
 	$("#txtApellido").attr("disabled", "disabled");
 	$("#txtCorreo").attr("disabled", "disabled");
 	$("#btnSeleccionaAsiento").addClass("hidden");
 	$("#contBtnReservaPasaje").removeClass("hidden");
+	*/
 	
 	//Muestro la barra de carga
 	loadBarShow();

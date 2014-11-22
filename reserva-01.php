@@ -12,6 +12,7 @@ if($tipoVuelo==1){
 	$codVueloVuelta=$_POST['radVueloVuelta'];
 }
 
+$Avion = new Aviones();
 
 //$Aeropuerto = new Aeropuertos();
 
@@ -86,6 +87,26 @@ if($tipoVuelo==1){
 					<div class="col-md-2 col-xs-12"><input class="form-control" type="email" id="txtCorreo" name="txtCorreo" placeholder="Ingrese su correo" required="" /></div>
 					<div class="col-md-4 col-xs-12"></div>
 				</div>
+				<div class="row rowFiltro00">
+					<div class="col-md-4 col-xs-12"></div>
+					<div class="col-md-2 col-xs-12"><label>Clase:</label></div>
+					<div class="col-md-2 col-xs-12">
+						<select class="form-control" id="selClase" name="selClase">
+							<?php
+							$arrClase=$Avion->getArrayClases();
+							if(count($arrClase>0)){
+								foreach($arrClase as $ac){
+									echo "<option value='".$ac['cod']."'>".$ac['tipo']."</option>";
+								}//end foreach
+								
+							}else{
+								echo "<option value='0'>Ocurrio un error cargando las clases</option>";
+							}
+							?>
+						</select>
+					</div>
+					<div class="col-md-4 col-xs-12"></div>
+				</div>
 					
 				<div class="row rowFiltro00">
 					<div class="col-md-5 col-xs-12"></div>
@@ -98,53 +119,6 @@ if($tipoVuelo==1){
 
 				<div class="row separador01"></div>
 				
-				<!-- Ahora viene el dibujo del avion -->
-				<div id="dibujoAvionIda" class="row rowFiltro00 hidden">
-					<div class="col-md-12 col-xs-12">
-						<div class="row rowFiltro00">
-							<div class="col-md-5 hidden-xs"></div>
-							<div class="col-md-2 col-xs-12 text-center"><p class="bg-info">Primera Clase</p></div>
-							<div class="col-md-5 hidden-xs"></div>
-						</div>
-						<div class="row rowFiltro00">
-							<div class="col-md-5 hidden-xs"></div>
-							<div class="col-md-2 col-xs-12 text-center"><p class="bg-success">Ejecutivo</p></div>
-							<div class="col-md-5 hidden-xs"></div>
-						</div>
-						<div class="row rowFiltro00">
-							<div class="col-md-5 hidden-xs"></div>
-							<div class="col-md-2 col-xs-12 text-center"><p class="bg-danger">No Disponible</p></div>
-							<div class="col-md-5 hidden-xs"></div>
-						</div>
-						<div class="row rowFiltro00">
-							<div class="col-md-12 col-xs-12"><h3>Selecci&oacute;n de asientos para el vuelo de ida</h3></div>
-						</div>
-						<div class="row rowFiltro00">
-							<div class="col-md-4 hidden-xs text-right"><img class="img-responsive" src="media/img/wing_left.png" /></div>
-							<div class="col-md-4 col-xs-12" id="contAsientosIda"></div>
-							<div class="col-md-4 hidden-xs text-left"><img class="img-responsive" src="media/img/wing_right.png" /></div>
-						</div>
-					</div>
-				</div>
-
-				<div id="dibujoAvionVuelta" class="row rowFiltro00 hidden">
-					<div class="col-md-12 col-xs-12">
-						<div class="row rowFiltro00">
-							<div class="col-md-12 col-xs-12"><h3>Selecci&oacute;n de asientos para el vuelo de vuelta</h3></div>
-						</div>
-						<div class="row rowFiltro00">
-							<div class="col-md-4 hidden-xs text-right"><img class="img-responsive" src="media/img/wing_left.png" /></div>
-							<div class="col-md-4 col-xs-12" id="contAsientosVuelta"></div>
-							<div class="col-md-4 hidden-xs text-left"><img class="img-responsive" src="media/img/wing_right.png" /></div>
-						</div>
-					</div>
-				</div>
-				
-				<div id="contBtnReservaPasaje" class="row rowFiltro00 hidden">
-					<div class="col-md-12 col-xs-12 text-center">
-						<button type="button" id="btnSeleccionaAsiento" class="btn btn-default btn-lg" onclick="reservaPasajeOld()" >Reservar Pasaje <span class="glyphicon glyphicon-briefcase"></span></button>
-					</div>
-				</div>
 				
 			</form>
 		</div>
