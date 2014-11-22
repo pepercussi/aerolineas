@@ -6,8 +6,10 @@ if(isset($_POST['metodo'])){
 
 	if($metodo=="checkCapacidadByVuelo"){
 		$codVuelo = $_POST["vuelo"];
+		$clase = $_POST["claseVuelo"];
+		
 		$Reserva = new Reservas();
-		echo $Reserva->checkCapacidadByVuelo($codVuelo);
+		echo $Reserva->checkCapacidadByVuelo($codVuelo, $clase);
 		
 	}//End method checkCapacidadByVuelo
 
@@ -23,16 +25,17 @@ if(isset($_POST['metodo'])){
 		$nombre = $_POST['txtNombre'];
 		$email = $_POST['txtCorreo'];
 		$f_nacimiento = $_POST['txtFechaNacimiento'];
+		$clase = $_POST['selClase'];
 		
 		$tipoVuelo = $_POST['hTipoVuelo'];
 		$codVueloIda = $_POST['hCodVueloIda'];
 		$codAsientoIda = "null";
-		$Reserva->insertaReserva($numReserva, "", 0, $codAsientoIda, $codVueloIda, $dniPasajero);
+		$Reserva->insertaReserva($numReserva, "", 0, $codAsientoIda, $codVueloIda, $dniPasajero, $clase);
 		
 		if($tipoVuelo==1){
 			$codVueloVuelta = $_POST['hCodVueloVuelta'];
 			$codAsientoVuelta = "null";
-			$Reserva->insertaReserva($numReserva, "", 0, $codAsientoVuelta, $codVueloVuelta, $dniPasajero);
+			$Reserva->insertaReserva($numReserva, "", 0, $codAsientoVuelta, $codVueloVuelta, $dniPasajero, $clase);
 		}
 		
 		//Luego controlo si existe el pasajero

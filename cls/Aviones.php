@@ -71,10 +71,11 @@ class Aviones{
 	
 	}//End method getAsientosLibresByCodVuelo
 
-	public function getCantidadAsientosByCodAvion($codAvion){
+	public function getCantidadAsientosByCodAvion($codAvion, $clase){
 		$consulta00="SELECT count(numero) as Cantidad
 		FROM asiento asi
 		WHERE cod_tiene=".$codAvion."
+		AND cod_clase=".$clase."
 		;";
 		
 		$result00=$this->db->query($consulta00);

@@ -11,18 +11,18 @@ class Reservas{
 		$this->db = null;
 	}
 	
-	public function checkCapacidadByVuelo($codVuelo){
+	public function checkCapacidadByVuelo($codVuelo, $clase){
 		$Avion = new Aviones();
 		$Vuelo = new Vuelos();
 		
 		//Primero obtengo el codigo del avion
 		$codAvion = $Vuelo->getCodAvionByVuelo($codVuelo);
 		
-		//Luego obtengo la cantidad de asientos del avion
-		$cantAsientos = $Avion->getCantidadAsientosByCodAvion($codAvion);
+		//Luego obtengo la cantidad de asientos por clase del avion
+		$cantAsientos = $Avion->getCantidadAsientosByCodAvion($codAvion, $clase);
 		
-		//Por ultimo obtengo la cantidad de asientos ocupados del vuelo y comparo con la cantidad total
-		$cantReservas = $this->getCantReservasByCodVuelo($codVuelo);
+		//Por ultimo obtengo la cantidad de asientos ocupados del vuelo por clase y comparo con la cantidad total
+		$cantReservas = $this->getCantReservasByCodVuelo($codVuelo, $clase);
 		
 		$diferencia=$cantAsientos-$cantReservas;
 		if($diferencia>0){
@@ -51,10 +51,11 @@ class Reservas{
 		
 	}//End method checkReserva
 	
-	public function getCantReservasByCodVuelo($codVuelo){
+	public function getCantReservasByCodVuelo($codVuelo, $clase){
 		$consulta00="SELECT count(cod) as Cantidad
 		FROM reserva
 		WHERE cod_vuelo=".$codVuelo."
+		AND clase=".$clase."
 		;";
 		
 		$result00=$this->db->query($consulta00);
@@ -97,9 +98,9 @@ class Reservas{
 	    return $randomString;
 	}//End method getRandomCode
 	
-	public function insertaReserva($numReserva, $factura, $checkIn, $codAsiento, $codVuelo, $codPasajero){
-		$consulta00="INSERT INTO reserva (num_reserva, factura, checkin, cod_asiento, cod_vuelo, cod_pasajero)
-		VALUES ('".$numReserva."', '".$factura."', ".$checkIn.", ".$codAsiento.", ".$codVuelo.", ".$codPasajero.");";
+	public function insertaReserva($numReserva, $factura, $checkIn, $codAsiento, $codVuelo, $codPasajero, $clase){
+		$consulta00="INSERT INTO reserva (num_reserva, factura, checkin, cod_asiento, cod_vuelo, cod_pasajero, clase)
+		VALUES ('".$numReserva."', '".$factura."', ".$checkIn.", ".$codAsiento.", ".$codVuelo.", ".$codPasajero.", ".$clase.");";
 		//echo "</br>".$consulta00."</br>";
 		$this->db->query($consulta00);
 	}//End method insertaReserva

@@ -140,14 +140,19 @@ function reservaPasaje(){
             return(0);
 	}//End control correo
 	
-
+	if(clase==0){
+		alert("Ha ocurrido un error cargando las clases. No es posible procesar su solicitud.");
+		return(0);
+	}
+	
 	//Chequeo si entra en lista de espera
 	//Primero el de ida
 	$.post(
 		url,
 		{
 			metodo:"checkCapacidadByVuelo",
-			vuelo: codVueloIda
+			vuelo: codVueloIda,
+			claseVuelo: clase
 		},
 		function(result){
 			//alert("result ida: "+result);
@@ -175,7 +180,8 @@ function reservaPasaje(){
 			url,
 			{
 				metodo:"checkCapacidadByVuelo",
-				vuelo: codVueloVuelta
+				vuelo: codVueloVuelta,
+				claseVuelo: clase
 			},
 			function(result){
 				//alert("result vuelta: "+result);
