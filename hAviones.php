@@ -7,8 +7,9 @@ if(isset($_POST['metodo'])){
 	if($metodo=="getAsientosLibresByCodVuelo"){
 		$codVuelo = $_POST["t_codVuelo"];
 		$tipoVuelo = $_POST["t_tipoVuelo"];
+		$claseVuelo = $_POST['claseVuelo'];
 		$Avion = new Aviones();
-		$Avion->getAsientosLibresByCodVuelo($codVuelo, $tipoVuelo);
+		$Avion->getAsientosLibresByCodVuelo($codVuelo, $tipoVuelo, $claseVuelo);
 	}//End metodo getAsientosLibresByCodVuelo
 	
 	
