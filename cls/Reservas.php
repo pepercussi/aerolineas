@@ -195,7 +195,7 @@ class Reservas{
 		}//End if
 	}//End method getDatosReserva
 
-	function getArrayReserva($hDni,$hReserva){
+	public function getArrayReserva($hDni,$hReserva){
 		$consulta00="SELECT
 		p.nombre, 
 		p.apellido, 
