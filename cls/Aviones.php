@@ -20,7 +20,7 @@ class Aviones{
 		return $this->db->query($consulta00);
 	}//End method getArrayClases
 
-	public function getAsientosLibresByCodVuelo($codigoVuelo, $tipoVuelo){
+	public function getAsientosLibresByCodVuelo($codigoVuelo, $tipoVuelo, $clase){
 		//Primero obtenco elcodigo de avion
 		$this->codigoAvion = $this->getCodigoAvionByCodVuelo($codigoVuelo);
 		$idRad=$nameRad="";
@@ -51,10 +51,18 @@ class Aviones{
 							//El asiento esta libre
 							if($claseAsiento==1){
 								//Si es primera clase
-								echo "<td class='text-center'><p class='bg-info img-rounded'>".$nroAsiento."</p><input type='radio' name='".$nameRad."' id='".$idRad."' value='".$codAsiento."'/></td>";
+								echo "<td class='text-center'><p class='bg-info img-rounded'>".$nroAsiento."</p>";
+								if($claseAsiento==$clase){
+									echo "<input type='radio' name='".$nameRad."' id='".$idRad."' value='".$codAsiento."'/>";
+								}
+								echo "</td>";
 							}else{
 								//Si es clase ejecutiva
-								echo "<td class='text-center'><p class='bg-success img-rounded'>".$nroAsiento."</p><input type='radio' name='".$nameRad."' id='".$idRad."' value='".$codAsiento."'/></td>";
+								echo "<td class='text-center'><p class='bg-success img-rounded'>".$nroAsiento."</p>";
+								if($claseAsiento==$clase){
+									echo "<input type='radio' name='".$nameRad."' id='".$idRad."' value='".$codAsiento."'/>";
+								}
+								echo "</td>";
 							}
 						}else{
 							//El asiento esta ocupado
