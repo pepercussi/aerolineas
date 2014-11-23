@@ -29,6 +29,11 @@ class Pasajeros{
 		}//End if
 	}//End method controlaPasajero
 	
+	public function getNombreyApellidoByDni($dni){
+		$consulta00="SELECT nombre, apellido FROM pasajero where dni=".$dni.";";
+		return $this->db->query($consulta00);
+	}//End method getNombreyApellidoByDni
+	
 	public function insertaPasajero($dni, $apellido, $nombre, $mail, $f_nac){
 		$consulta00="INSERT INTO pasajero (dni, apellido, nombre, mail, f_nac)
 		VALUES (".$dni.", '".$apellido."', '".$nombre."', '".$mail."', '".$f_nac."');";

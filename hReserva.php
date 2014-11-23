@@ -58,9 +58,16 @@ if(isset($_POST['metodo'])){
 		$Reserva = new Reservas();
 		$Avion = new Aviones();
 		$Vuelo = new Vuelos();
+		$Pasajero = new Pasajeros();
 		
 		//Obtengo las variables
 		$dniPasajero = $_POST['hDni'];
+		$arrNyA = $Pasajero->getNombreyApellidoByDni($dniPasajero);
+		$nyaPasajero = "";
+		foreach($arrNyA as $ap){
+			$nyaPasajero = $ap['nombre']." ".$ap['apellido'];
+		}//End foreach
+		
 		$numReserva = $_POST['hReserva'];
 		$tipoVuelo = $_POST['hTipoVuelo'];
 
