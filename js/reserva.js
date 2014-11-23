@@ -210,30 +210,6 @@ function reservaPasaje(){
 	
 }//End function reservaPasaje
 
-function reservaPasajeOld(){
-	//Controlo que se hallan seleccionado los asientos
-	if(!$("input[name=radAsientoIda]:checked").val()){//Si no esta seleccionado el vuelo de ida
-		alert("Por favor seleccione un asiento en el vuelo de ida.");
-		return 0;
-	}//End if
-	
-	if($("#hTipoVuelo").val()==1){//Si es un vuelo de ida y vuelta
-		if(!$("input[name=radAsientoVuelta]:checked").val()){//Si no esta seleccionado el vuelo de vuelta
-			alert("Por favor seleccione un asiento en el vuelo de vuelta.");
-			return 0;
-		}//End if
-	}//End if
-	
-	
-	//Si esta todo OK habilito nuevamente los inputs y hago el submit para grabar la reserva
-	$("#txtDni").removeAttr("disabled");
-	$("#txtFechaNacimiento").removeAttr("disabled");
-	$("#txtNombre").removeAttr("disabled");
-	$("#txtApellido").removeAttr("disabled");
-	$("#txtCorreo").removeAttr("disabled");
-	$("#frmVuelos").submit();
-}//End function reservaPasajeOld
-
 function siguientePaso(){
 	
 	var ida_y_vuelta=0;//Por defecto es solo un vuelo de ida

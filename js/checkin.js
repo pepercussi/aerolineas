@@ -59,13 +59,13 @@ function seleccionaAsiento(){
 	$("#txtCodReserva").attr("disabled", "disabled");
 	$("#btnCheckin").addClass("hidden");
 	$("#btnSeleccionaAsiento").addClass("hidden");
+	$("#contBtnReservaPasaje").removeClass("hidden");
 	/*
 	$("#txtFechaNacimiento").attr("disabled", "disabled");
 	$("#txtNombre").attr("disabled", "disabled");
 	$("#txtApellido").attr("disabled", "disabled");
 	$("#txtCorreo").attr("disabled", "disabled");
 	$("#btnSeleccionaAsiento").addClass("hidden");
-	$("#contBtnReservaPasaje").removeClass("hidden");
 	*/
 	
 	//Muestro la barra de carga
@@ -104,3 +104,21 @@ function seleccionaAsiento(){
 	
 }//End function seleccionaAsiento
 
+function realizarChecking(){
+	//Controlo que se hallan seleccionado los asientos
+	if(!$("input[name=radAsientoIda]:checked").val()){//Si no esta seleccionado el vuelo de ida
+		alert("Por favor seleccione un asiento en el vuelo de ida.");
+		return 0;
+	}//End if
+	
+	if($("#hTipoVuelo").val()==1){//Si es un vuelo de ida y vuelta
+		if(!$("input[name=radAsientoVuelta]:checked").val()){//Si no esta seleccionado el vuelo de vuelta
+			alert("Por favor seleccione un asiento en el vuelo de vuelta.");
+			return 0;
+		}//End if
+	}//End if
+	
+	
+	//Si esta todo OK hago el submit para realizar el checking
+	$("#frmCheckin").submit();
+}//End function realizarChecking
