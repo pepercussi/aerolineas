@@ -67,11 +67,21 @@ if(isset($_POST['metodo'])){
 						echo "	<h3 class='panel-title'>Abone su pasaje</h3>";
 					echo "</div>";
 					echo "	<div class='panel-body'>";
-						echo "<div class='col-md-4'>Tarjetas de credito</div>";
-						echo "<div class='col-md-8'>";
-							echo "<div class='col-md-12'><input type='text' class='form-control'/></div>";
-							echo "<div class='col-md-6'><input type='text' class='form-control'/></div>";
-							echo "<div class='col-md-6'><input type='text' class='form-control'/></div>";
+						echo "<div class='col-md-4 col-xs-12'>";
+							echo "<div class='col-md-6 col-xs-6'><img src='media/img/visaLogo.png' class='img-responsive'/></div>";
+							echo "<div class='col-md-6 col-xs-6'><img src='media/img/mastercardLogo.png' class='img-responsive'/></div>";
+						echo "</div>";
+						echo "<div class='col-md-8 col-xs-12'>";
+							echo "<div class='col-md-3 rowFiltro00'><label>Numero de tarjeta</label></div><div class='col-md-9 rowFiltro00'><input type='text' class='form-control' name='txtnroTarjeta'/></div>";
+							echo "<div class='col-md-3 rowFiltro00'><label>Codigo de seguridad</label></div><div class='col-md-3 rowFiltro00'><input type='text' class='form-control' name='txtcodSeg' /></div>";
+							echo "<div class='col-md-3 rowFiltro00'><label>Cuotas</label></div><div class='col-md-3 rowFiltro00'>";
+								echo "<select class='form-control' name='txtCuotas'>";
+									echo "<option value='1'>1</option>";
+								  	echo "<option value='3'>3</option>";
+								  	echo "<option value='6'>6</option>";
+								  	echo "<option value='12'>12</option>";
+								echo "</select>";
+							echo "</div>";
 						echo "</div>";
 					echo "</div>";
 					

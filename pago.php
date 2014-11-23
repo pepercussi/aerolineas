@@ -49,7 +49,7 @@
 				<div class="row rowFiltro00">
 					<div class="col-md-5 col-xs-12"></div>
 					<div class="col-md-2 col-xs-12">
-						<button type="button" id="btnCheckin" class="btn btn-default btn-lg" onclick="comprobarDatosPago()" >Comprobar datos <span class="glyphicon glyphicon-ok"></span></button>
+						<button type="button" class="btn btn-default btn-lg" onclick="comprobarDatosPago()" >Comprobar datos <span class="glyphicon glyphicon-ok"></span></button>
 					</div>
 					<div class="col-md-5 col-xs-12"></div>
 				</div>
