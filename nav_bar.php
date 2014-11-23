@@ -21,7 +21,7 @@ foreach($arrPath as $ap){
 	    <div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 		        <li <?php if($direccionActual=="reserva-00.php"){echo "class='active'";}?>><a href="reserva-00.php">Reservar</a></li>
-		        <li <?php if($direccionActual=="pago.php"){echo "class='active'";}?>><a href="#">Pagar</a></li>
+		        <li <?php if($direccionActual=="pago.php"){echo "class='active'";}?>><a href="pago.php">Pagar</a></li>
 		        <li <?php if($direccionActual=="checkin.php"){echo "class='active'";}?>><a href="checkin.php">Check-in</a></li>
 	      	</ul>
 	    </div>
