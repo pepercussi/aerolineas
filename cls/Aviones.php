@@ -171,7 +171,24 @@ class Aviones{
 			return 0;
 		}//End if
 	}//End method getNroAsientoByCodAvion
+
+	public function getNroAsientoByCodAsiento($codigoAsiento){
+		$consulta00="SELECT numero as nro_asiento
+		FROM asiento
+		WHERE cod=".$codigoAsiento."
+		;";
 		
+		$result00=$this->db->query($consulta00);
+		
+		if(count($result00)>0){
+			foreach($result00 as $r00){
+				return $r00['nro_asiento'];
+			}//end foreach
+		}else{
+			return 0;
+		}//End if
+	}//End method getNroAsientoByCodAsiento
+			
 }// End Class Aviones
 ?>
 

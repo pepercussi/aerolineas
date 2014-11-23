@@ -61,33 +61,59 @@ if(isset($_POST['metodo'])){
 		$Pasajero = new Pasajeros();
 		
 		//Obtengo las variables
+		$numReserva = $_POST['hReserva'];
+		$tipoVuelo = $_POST['hTipoVuelo'];
+		
 		$dniPasajero = $_POST['hDni'];
 		$arrNyA = $Pasajero->getNombreyApellidoByDni($dniPasajero);
 		$nyaPasajero = "";
-		foreach($arrNyA as $ap){
-			$nyaPasajero = $ap['nombre']." ".$ap['apellido'];
-		}//End foreach
+		foreach($arrNyA as $ap){ $nyaPasajero = $ap['nombre']." ".$ap['apellido']; }//End foreach
 		
-		$numReserva = $_POST['hReserva'];
-		$tipoVuelo = $_POST['hTipoVuelo'];
 
 		$codVueloIda = $_POST['hCodVueloIda'];
+		$arrVueloIda = $Vuelo->getArrayVuelosByCodigo($codVueloIda);
+		$fechaSalidaIda = "";
+		$origenIda = "";
+		$destinoIda = "";
+		$avionIda = "";
+		foreach($arrVueloIda as $avi){
+			$fechaSalidaIda = $avi['fecha_salida'];
+			$origenIda = $avi['origen'];
+			$destinoIda = $avi['destino'];
+			//$avionIda = $avi['avion'];
+		}//End foreach
 		$codAsientoIda = $_POST['radAsientoIda'];
-
+		$nroAsientoIda = $Avion->getNroAsientoByCodAsiento($codAsientoIda);
+		
 		$contenidoQR="DNI: ".$dniPasajero."\n";
+		$contenidoQR="Nombre y Apellido: ".$nyaPasajero."\n";
 		$contenidoQR.="Nro. Reserva: ".$dniPasajero."\n";
-		$contenidoQR.="Vuelo Ida: ".$codVueloIda."\n";
-		$contenidoQR.="Asiento Vuelo Ida: ".$codVueloIda."\n";
+		$contenidoQR.="Fecha (Vuelo Ida): ".$fechaSalidaIda."\n";
+		$contenidoQR.="Asiento (Vuelo Ida): ".$nroAsientoIda."\n";
+		$contenidoQR.="Origen / Destino (Vuelo Ida): ".$origenIda." / ".$destinoIda."\n";
 
 
 		$Reserva->realizaCheckIn($numReserva, $dniPasajero, $codVueloIda, $codAsientoIda);
 		
 		if($tipoVuelo==1){
 			$codVueloVuelta = $_POST['hCodVueloVuelta'];
+			$arrVueloVuelta = $Vuelo->getArrayVuelosByCodigo($codVueloVuelta);
+			$fechaSalidaVuelta = "";
+			$origenVuelta = "";
+			$destinoVuelta = "";
+			$avionVuelta = "";
+			foreach($arrVueloVuelta as $avv){
+				$fechaSalidaVuelta = $avv['fecha_salida'];
+				$origenVuelta = $avv['origen'];
+				$destinoVuelta = $avv['destino'];
+				//$avionVuelta = $avv['avion'];
+			}//End foreach
 			$codAsientoVuelta = $_POST['radAsientoVuelta'];
+			$nroAsientoVuelta = $Avion->getNroAsientoByCodAsiento($codAsientoVuelta);
 
-			$contenidoQR.="Vuelo Vuelta: ".$codVueloVuelta."\n";
-			$contenidoQR.="Asiento Vuelo Vuelta: ".$codVueloVuelta."\n";
+			$contenidoQR.="Fecha (Vuelo Vuelta): ".$fechaSalidaVuelta."\n";
+			$contenidoQR.="Asiento (Vuelo Vuelta): ".$nroAsientoVuelta."\n";
+			$contenidoQR.="Origen / Destino (Vuelo Vuelta): ".$origenVuelta." / ".$destinoVuelta."\n";
 
 
 			$Reserva->realizaCheckIn($numReserva, $dniPasajero, $codVueloVuelta, $codAsientoVuelta);

@@ -199,7 +199,8 @@ class Reservas{
 		av.cod as codigo_avion,
 		r.checkin,
 		r.cod_vuelo as cod_vuelo,
-		r.clase
+		r.clase,
+		a.numero as nro_asiento
 		
 		FROM reserva r
 		INNER JOIN pasajero p on p.dni=r.cod_pasajero
