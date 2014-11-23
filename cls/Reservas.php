@@ -227,7 +227,7 @@ class Reservas{
 
 	}//End method getArrayReserva	
 		
-	function getClase($clase){
+	public function getClase($clase){
 		$consulta00="SELECT
 		tipo
 		FROM clase
@@ -245,7 +245,7 @@ class Reservas{
 		}//End if
 	}//End method getClase
 	
-	function getPago($codDni, $codReserva){
+	public function getEstadoDePago($codDni, $codReserva){
 		$consulta00="SELECT
 		factura
 		FROM reserva
@@ -263,7 +263,7 @@ class Reservas{
 			return 0;
 		}//End if
 		
-	}
+	}//End method getPago
 
 	public function realizaCheckIn($nroReserva, $codPasajero, $codVuelo, $codAsiento){
 		$consulta00="UPDATE reserva
@@ -275,5 +275,62 @@ class Reservas{
 		$this->db->query($consulta00);
 	}//End method realizaCheckIn
 
+	public function getPrecioVuelo($codDni, $codReserva, $clase){
+		$consulta00="SELECT 
+		cu.precio
+		
+		FROM cuesta cu 
+		
+		INNER JOIN clase cl on cl.cod=cu.cod_clase 
+		INNER JOIN vuelo v on v.cod=cu.cod_vuelo 
+		INNER JOIN reserva r on r.cod_vuelo=v.cod 
+		
+		WHERE r.cod_pasajero=".$codDni."
+		AND r.num_reserva='".$codReserva."'
+		AND cl.cod=".$clase."
+		;"; 
+		
+		$result00=$this->db->query($consulta00);
+		
+		if(count($result00)>0){
+			$precio=0;
+			foreach ($result00 as $r00) {
+				$precio=$precio+$r00['precio'];
+			}
+			return $precio;
+		}else{
+			return 0;
+		}//End if
+		
+	}//End method getPrecioVuelo
+	
+	public function getUltimaFactura(){
+		$consulta00="SELECT
+		MAX(factura) as ultimaFct
+		FROM reserva";
+		
+		$result00=$this->db->query($consulta00);
+		
+		if(count($result00)>0){
+			foreach ($result00 as $r00) {
+				return $r00['ultimaFct'];
+			}
+		}else{
+			return 0;
+		}//End if
+	
+	}//End method getUltimaFactura
+	
+	public function actualizaFactura($proxFct, $codDni, $codReserva){
+		$consulta00 = "UPDATE reserva 
+		SET factura=".$proxFct."
+		WHERE cod_pasajero=".$codDni."
+		AND num_reserva='".$codReserva."'
+		;"; 
+		
+		$this->db->query($consulta00);
+	
+	}//End method actualizaFactura
+	
 }// End Class Reservas
 ?>

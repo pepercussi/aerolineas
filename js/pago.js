@@ -30,4 +30,41 @@ function comprobarDatosPago(){
 		}
 	);//End if
 	
-}
+}//End function comprobarDatosPago
+
+function abonarPago(){
+	//Controlo los datos de la tarjeta de credito
+	var nroTarjeta = $("#txtNroTarjeta").val();
+	var codSeg = $("#txtCodSeg").val();
+	if(nroTarjeta==''||codSeg==''){
+		alert("ATENCION: Para continuar debe completar los campos solicitados");
+		return(0);
+	}else{
+		if(isNaN(nroTarjeta)||isNaN(codSeg)){
+			alert ("Los datos ingresados son invalidos");
+			return (0);
+		}
+	}//End control campos vacios y datos validos
+	controlaTipo=nroTarjeta.substring(0,2); //tomo los dos primeros digitos de la tarjeta
+	if (controlaTipo.substring(0,1)==4){
+		$( "input[name='tarjeta']" ).val( "Visa" ); //Modifico el atributo del input hidden del formulario
+	}else{
+		if(controlaTipo>=51&&controlaTipo<=55){
+			$( "input[name='tarjeta']" ).val( "Mastercard" );
+		}
+		else{
+			if(controlaTipo==34||controlaTipo==37){
+				$( "input[name='tarjeta']" ).val( "American Express" );
+			}else{
+				alert ("no es una tarjeta valida");
+				return 0;
+			}
+		}
+	}
+	loadBarShow();
+	$("#frmPago").submit();
+	loadBarHide();
+
+}//End funtion abonarPago
+
+

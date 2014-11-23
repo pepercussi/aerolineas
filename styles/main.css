@@ -24,3 +24,8 @@
 #loadBarCont{
 	margin-top: 20%; 
 }
+
+.celdaBlue{
+	background-color: rgb(66,139,202);
+	color: #FFFFFF;
+	font-size: 0.9em;
