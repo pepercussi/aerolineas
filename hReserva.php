@@ -87,7 +87,7 @@ if(isset($_POST['metodo'])){
 		
 		$contenidoQR="DNI: ".$dniPasajero."\n";
 		$contenidoQR="Nombre y Apellido: ".$nyaPasajero."\n";
-		$contenidoQR.="Nro. Reserva: ".$dniPasajero."\n";
+		$contenidoQR.="Nro. Reserva: ".$numReserva."\n";
 		$contenidoQR.="Fecha (Vuelo Ida): ".$fechaSalidaIda."\n";
 		$contenidoQR.="Asiento (Vuelo Ida): ".$nroAsientoIda."\n";
 		$contenidoQR.="Origen / Destino (Vuelo Ida): ".$origenIda." / ".$destinoIda."\n";
