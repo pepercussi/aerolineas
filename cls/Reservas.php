@@ -224,5 +224,15 @@ class Reservas{
 		return $this->db->query($consulta00);
 		
 	}		
+
+	public function realizaCheckIn($nroReserva, $codPasajero, $codVuelo, $codAsiento){
+		$consulta00="UPDATE reserva
+		SET checkin=1, cod_asiento=".$codAsiento."
+		WHERE num_reserva='".$nroReserva."'
+		AND cod_vuelo=".$codVuelo."
+		AND cod_pasajero=".$codPasajero.";";
+		
+		$this->db->query($consulta00);
+	}//End method realizaCheckIn
 }// End Class Reservas
 ?>

@@ -34,7 +34,8 @@
 				<div class="col-md-12 col-xs-12"><h1>Realice el Check-in</h1></div>
 			</div>
 			<div class="row separador01"></div>
-			<form id="frmCheckin" action="generaQr.php" method="post" role="form" class="form-inline">
+			<form id="frmCheckin" action="hReserva.php" method="post" role="form" class="form-inline">
+				<input type="hidden" id="metodo" name="metodo" value="realizarChecking" />
 				<div class="row rowFiltro00">
 					<div class="col-md-4 col-xs-12"></div>
 					<div class="col-md-2 col-xs-12"><label>DNI:</label></div>
@@ -103,7 +104,7 @@
 				
 				<div id="contBtnReservaPasaje" class="row rowFiltro00 hidden">
 					<div class="col-md-12 col-xs-12 text-center">
-						<button type="button" id="btnSeleccionaAsiento" class="btn btn-default btn-lg" onclick="reservaPasajeOld()" >Reservar Pasaje <span class="glyphicon glyphicon-briefcase"></span></button>
+						<button type="button" id="btnRealizaChecking" class="btn btn-default btn-lg" onclick="realizarChecking()" >Realizar Check-In <span class="glyphicon glyphicon-briefcase"></span></button>
 					</div>
 				</div>
 				<!-- END DIBUJO DEL AVION -->
