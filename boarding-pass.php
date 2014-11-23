@@ -1,6 +1,7 @@
 <?php require_once('cfg/core.php')?>
 <?php 
 //require_once('lib/dompdf/dompdf_config.inc.php');
+require_once('lib/fpdf17/fpdf.php');
 $Reserva = new Reservas();
 $Pasajero = new Pasajeros();
 
@@ -16,6 +17,23 @@ $arrReserva = $Reserva->getArrayReserva($dniPasajero, $nroReserva);
 $cantReservas = count($arrReserva);
 
 //$pdf="<html><head><title>Aerolineas - Boarding Pass</title></head><body>";
+$pdf = new FPDF('P','mm','A4'); 
+$pdf->AddPage(); 
+$pdf->SetFont('Arial','B',16);
+$pdf->Cell(200,10,'Aerolineas - Boarding Pass',0,1,'C');
+$pdf->SetFont('Arial','B',14);
+$pdf->Cell(200,10,'Codigo de reserva:',0,1,'C');
+$pdf->SetFont('Arial','',14);
+$pdf->Cell(200,10,$nroReserva,0,1,'C');
+$pdf->SetFont('Arial','B',14);
+$pdf->Cell(200,10,'Nombre y Apellido:',0,1,'C');
+$pdf->SetFont('Arial','',14);
+$pdf->Cell(200,10,$nyaPasajero,0,1,'C');
+$pdf->SetFont('Arial','B',14);
+$pdf->Cell(200,10,'D.N.I.:',0,1,'C');
+$pdf->SetFont('Arial','',14);
+$pdf->Cell(200,10,$dniPasajero,0,1,'C');
+
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -78,7 +96,7 @@ $cantReservas = count($arrReserva);
 				<div class="col-md-1 col-xs-12"></div>
 				<div class="col-md-10 col-xs-12">
 					<?php
-					//$falg=0;
+					$flag=0;
 					if($cantReservas>0){
 						echo "<table class='table table-striped'>";
 						//$pdf.="<table>";
@@ -108,6 +126,36 @@ $cantReservas = count($arrReserva);
 									echo "<td class='text-center'>".$ar['nro_asiento']."</td>";
 								echo "</tr>";
 								//$pdf.="<tr><td>".$ar['fecha_sal']."</td><td>".$ar['origen']."</td><td>".$ar['destino']."</td><td>".$ar['nro_asiento']."</td></tr>";
+								if($flag==0){
+									$flag++;
+									$pdf->SetFont('Arial','B',15);
+									$pdf->Cell(50,10,'Vuelo de ida:',0,1,'L');
+								}else{
+									$pdf->SetFont('Arial','B',15);
+									$pdf->Cell(50,10,'Vuelo de vuelta:',0,1,'L');
+								}
+								$pdf->SetFont('Arial','B',14);
+								$pdf->Cell(50,10,'Fecha Salida:',0,0,'R');
+								$pdf->SetFont('Arial','',12);
+								$pdf->Cell(150,10,$ar['fecha_sal'],0,0,'L');
+								$pdf->Ln();
+								$pdf->SetFont('Arial','B',14);
+								$pdf->Cell(50,10,'Origen:',0,0,'R');
+								$pdf->SetFont('Arial','',12);
+								$pdf->Cell(150,10,$ar['origen'],0,0,'L');
+								$pdf->Ln();
+								$pdf->SetFont('Arial','B',14);
+								$pdf->Cell(50,10,'Destino:',0,0,'R');
+								$pdf->SetFont('Arial','',12);
+								$pdf->Cell(150,10,$ar['destino'],0,0,'L');
+								$pdf->Ln();
+								$pdf->SetFont('Arial','B',14);
+								$pdf->Cell(50,10,'Asiento:',0,0,'R');
+								$pdf->SetFont('Arial','',12);
+								$pdf->Cell(150,10,$ar['nro_asiento'],0,0,'L');
+								$pdf->Ln();
+								
+								
 							}//End foreach
 							echo "</tbody>";
 							//$pdf.="</tbody>";
@@ -133,11 +181,15 @@ $cantReservas = count($arrReserva);
 			$dompdf->render();
 			$dompdf->stream("media/pdf/bp".$dniPasajero."-".$nroReserva.".pdf");
 			*/
+			$pdf->Image('media/qr_codes/bp'.$dniPasajero.'-'.$nroReserva.'.png',0,0,50,50);
+			
+			$pdf->Output("media/pdf/bp".$dniPasajero."-".$nroReserva.".pdf");
+			
 			?>
 			<div class="row rowFiltro00">
 				<div class="col-md-4 col-xs-12"></div>
 				<div class="col-md-4 col-xs-12 text-center">
-					<a class="btn btn-default" href='<?php echo "media/pdf/bp".$dniPasajero."-".$nroReserva.".pdf";?>'>Descargar PDF <span class="glyphicon glyphicon-floppy-save"></span></a>
+					<a target="_blank" class="btn btn-default" href='<?php echo "media/pdf/bp".$dniPasajero."-".$nroReserva.".pdf";?>'>Descargar PDF <span class="glyphicon glyphicon-floppy-save"></span></a>
 				</div>
 				<div class="col-md-4 col-xs-12"></div>
 			</div>
