@@ -37,13 +37,13 @@
 				<div class="row rowFiltro00">
 					<div class="col-md-4 col-xs-12"></div>
 					<div class="col-md-2 col-xs-12"><label>DNI:</label></div>
-					<div class="col-md-2 col-xs-12"><input class="form-control" type="text" id="txtDni" name="txtDni" placeholder="Ingrese su documento" required="" /></div>
+					<div class="col-md-2 col-xs-12"><input class="form-control" type="text" id="txtDni" name="txtDni" placeholder="Ingrese su documento" <?php if(isset($_GET['dni'])){echo "value='".$_GET['dni']."'";}?> required="" /></div>
 					<div class="col-md-4 col-xs-12"></div>
 				</div>
 				<div class="row rowFiltro00">
 					<div class="col-md-4 col-xs-12"></div>
 					<div class="col-md-2 col-xs-12"><label>Codigo de reserva:</label></div>
-					<div class="col-md-2 col-xs-12"><input class="form-control" type="text" id="txtCodReserva" name="txtCodReserva" placeholder="Ingrese el codigo" required="" /></div>
+					<div class="col-md-2 col-xs-12"><input class="form-control" type="text" id="txtCodReserva" name="txtCodReserva" placeholder="Ingrese el codigo" <?php if(isset($_GET['dni'])){echo "value='".$_GET['rc']."'";}?> required="" /></div>
 					<div class="col-md-4 col-xs-12"></div>
 				</div>
 				<div class="row rowFiltro00">
