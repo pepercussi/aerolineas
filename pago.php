@@ -33,9 +33,6 @@
 				<div class="col-md-12 col-xs-12"><h1>Pago de pasaje</h1></div>
 			</div>
 			<div class="row separador01"></div>
-			<div class="row">
-				<div class="col-md-12 col-xs-12"><h2>Datos del vuelo</h2></div>
-			</div>
 			<div class="row" id="contenedorFiltroPago">
 				<div class="row rowFiltro00">
 					<div class="col-md-4 col-xs-12"></div>
@@ -57,9 +54,8 @@
 					<div class="col-md-5 col-xs-12"></div>
 				</div>
 			</div>
-			<div class="row hidden" id="contDatosPago">
-				
-			</div>
+			<div class="row separador01"></div>
+			<div class= "hidden" id="contDatosPago"></div>
 		</div>
 	</body>
 </html>

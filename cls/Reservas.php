@@ -223,6 +223,44 @@ class Reservas{
 		;";
 		return $this->db->query($consulta00);
 		
-	}		
+	}//End method getArrayReserva	
+		
+	function getClase($clase){
+		$consulta00="SELECT
+		tipo
+		FROM clase
+		WHERE cod=".$clase.
+		";";
+		
+		$result00=$this->db->query($consulta00);
+		
+		if(count($result00)>0){
+				foreach($result00 as $r00){
+					return $r00['tipo'];
+				}//end foreach
+		}else{
+			return 0;
+		}//End if
+	}//End method getClase
+	
+	function getPago($codDni, $codReserva){
+		$consulta00="SELECT
+		factura
+		FROM reserva
+		WHERE cod_pasajero=".$codDni."
+		AND num_reserva='".$codReserva."'
+		;";
+		
+		$result00=$this->db->query($consulta00);
+	
+		if(count($result00)>0){
+				foreach($result00 as $r00){
+					return $r00['factura'];
+				}//end foreach
+		}else{
+			return 0;
+		}//End if
+		
+	}
 }// End Class Reservas
 ?>
