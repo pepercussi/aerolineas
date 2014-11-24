@@ -1,7 +1,3 @@
-<?php require_once('cfg/core.php') ?>
-<?php
-
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ES">
 	<head>
@@ -18,27 +14,7 @@
 		<script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script><!-- Bootstrap -->
 		<script type="text/javascript" src="lib/jquery-ui-1.11.2/jquery-ui.js"></script><!-- Jquery UI -->
 		<script type="text/javascript" src="js/reserva.js"></script><!-- Scripts de esta opcion -->
-		<script type="text/javascript">
-			function enviaCorreoPasajerosEnEspera(){
-				loadBarShow();
-				
-				$("#contenedorLog").removeClass("hidden");
-				$("#logResult").empty();
-				var url = "hReserva.php";
-				var metod = "alertaReservasSinConfirmar";
-				$("#logResult").load(
-					url,
-					{
-						metodo: metod
-					},
-					function(){
-						loadBarHide();
-					}//End callback
-				);//End load
-				
-				
-			}//End function enviaCorreoPasajerosEnEspera
-		</script><!-- Scripts de esta opcion -->
+		<script type="text/javascript" src="js/correosAutomaticos.js"></script><!-- Scripts de esta opcion -->
 		<!-- END SCRIPTS -->
 
 	</head>
