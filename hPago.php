@@ -85,7 +85,7 @@ if(isset($_POST['metodo'])){
 								echo "</select>";
 							echo "</div>";
 							echo "<input type='hidden' name='metodo' value='generarPago'/>";
-							echo "<input type='hidden' name='tarjeta'/>";
+							echo "<input type='hidden' name='tarjetaTipo'/>";
 							echo "<input type='hidden' name='htxtDni' value=".$codDni.">";
 							echo "<input type='hidden' name='htxtCodReserva' value='".$codReserva."'/>";
 							echo "<div class='col-md-12 rowFiltro00'><button type='button' class='btn btn-lg btn-success btn-block' onclick='abonarPago()'>Abonar &nbsp;&nbsp; <span class='glyphicon glyphicon-credit-card'></span></button></div>";
@@ -95,7 +95,7 @@ if(isset($_POST['metodo'])){
 					
 			}//End if $pago=0
 			else{
-				echo "<div class='alert alert-info text-center'><span class='glyphicon glyphicon-info-sign'></span>El vuelo ya se encuentra abonado, <a href='checkin.php'>continue con el check-in del vuelo </a></div>";	
+				echo "<div class='alert alert-info text-center'><span class='glyphicon glyphicon-info-sign'></span>El vuelo ya se encuentra abonado, <a href='checkin.php'>continue con el check-in del vuelo </a> o <a href='media/pdf/fct".$Reserva->getEstadoDePago($codDni, $codReserva).".pdf'>Descargar PDF <span class='glyphicon glyphicon-floppy-save'></span></a>";	
 			}
 		}else
 		{
@@ -107,8 +107,8 @@ if(isset($_POST['metodo'])){
 	if($metodo=="generarPago"){
 		//Asignacion de variables por POST
 		$nroTarjeta=$_POST["txtNroTarjeta"];
-		$codSeg=$_POST["txtCodSeg"];
-		$tarjeta=$_POST["tarjeta"];	
+		$cuotas=$_POST["txtcuotas"];
+		$tarjetaTipo=$_POST["tarjetaTipo"];	
 		$codDni=$_POST["htxtDni"];	
 		$codReserva=$_POST["htxtCodReserva"];
 			
@@ -119,6 +119,8 @@ if(isset($_POST['metodo'])){
 		
 		//Actualizo numero de factura en la reserva
 		$Reserva->actualizaFactura($proxFct, $codDni, $codReserva);
+		
+		header("Location: pago-00.php?rc=".$codReserva."&dni=".$codDni."&nroT=".$nroTarjeta."&tipo=".$tarjetaTipo."&cuotas=".$cuotas);
 		
 	}
 }

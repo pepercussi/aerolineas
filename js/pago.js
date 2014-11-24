@@ -47,14 +47,14 @@ function abonarPago(){
 	}//End control campos vacios y datos validos
 	controlaTipo=nroTarjeta.substring(0,2); //tomo los dos primeros digitos de la tarjeta
 	if (controlaTipo.substring(0,1)==4){
-		$( "input[name='tarjeta']" ).val( "Visa" ); //Modifico el atributo del input hidden del formulario
+		$( "input[name='tarjetaTipo']" ).val( "Visa" ); //Modifico el atributo del input hidden del formulario
 	}else{
 		if(controlaTipo>=51&&controlaTipo<=55){
-			$( "input[name='tarjeta']" ).val( "Mastercard" );
+			$( "input[name='tarjetaTipo']" ).val( "Mastercard" );
 		}
 		else{
 			if(controlaTipo==34||controlaTipo==37){
-				$( "input[name='tarjeta']" ).val( "American Express" );
+				$( "input[name='tarjetaTipo']" ).val( "American Express" );
 			}else{
 				alert ("no es una tarjeta valida");
 				return 0;

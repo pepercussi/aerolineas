@@ -49,7 +49,6 @@ if(isset($_POST['metodo'])){
 		}//End if
 		
 		//Ya grabamos la reserva así que le informamos el nro de la misma y le damos la opción de realizar el pago
-		header("Location: reserva-02.php?rc=".$numReserva."&dni=".$dniPasajero);
 		
 	}//End metodo grabaReserva
 	
