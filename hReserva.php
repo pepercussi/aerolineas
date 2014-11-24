@@ -4,6 +4,42 @@
 if(isset($_POST['metodo'])){
 	$metodo=$_POST['metodo'];
 
+	if($metodo=="alertaReservasSinConfirmar"){
+		$Avion = new Aviones();
+		$Pasajero = new Pasajeros();
+		$Reserva = new Reservas();
+		$Vuelos = new Vuelos();
+		//Primero buscamos los vuelos por vencer
+		$arrVuelos = $Vuelos->getArrayVuelosPorVencer(1);
+		
+		if($arrVuelos>0){
+			foreach($arrVuelos as $av){
+				$arrClases = $Avion->getArrayClases();
+				foreach($arrClases as $ac){
+					
+					//Obtengo los puestos libres para esa clase y ese vuelo
+					$cantTotAsientos=$Avion->getCantidadAsientosByCodAvion($av['cod_avion'], $ac['cod']);
+					$cantConfirmadaAsientos=$Reserva->getReservasConfirmadasByVueloAndClase($av['cod'], $ac['cod']);
+					$puestosLibres=$cantTotAsientos-$cantConfirmadaAsientos;
+					
+					if($puestosLibres>0){//Si hay puestos libres busco pasajeros en lista de espera
+						$arrPasajeros=$Pasajero->getArrayPasajerosEnEspera($av['cod'], $ac['cod'], $cantTotAsientos, $puestosLibres);
+						
+						if(count($arrPasajeros)>0){//Si hay pasajeros en espera les informo
+							foreach($arrPasajeros as $ap){//Envio los correos a los pasajeros en lista de espera
+								
+								
+								
+							}//End foreach pasajeros
+						}//End if pasajeros en espera
+						
+					}//End if puestos libres
+					
+				}//End foreach Clases
+			}//End foreach vuelos
+		}//End if
+	}//End method alertaReservasSinConfirmar
+
 	if($metodo=="checkCapacidadByVuelo"){
 		$codVuelo = $_POST["vuelo"];
 		$clase = $_POST["claseVuelo"];

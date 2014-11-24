@@ -304,6 +304,25 @@ class Reservas{
 		
 	}//End method getPrecioVuelo
 	
+	public function getReservasConfirmadasByVueloAndClase($codVuelo, $codClase){
+		$consulta00="SELECT count(cod) as cantidad
+		FROM reserva
+		WHERE factura>0
+		AND checkin=1
+		AND cod_vuelo=".$codVuelo."
+		AND clase=".$codClase."
+		;";
+		
+		$result00=$this->db->query($consulta);
+		if(count($result00)>0){
+			foreach($result00 as $r00){
+				return $r00['cantidad'];
+			}//End foreach
+		}else{
+			return 0;
+		}//End if
+	}//end method getReservasConfirmadasByAvionAndClase
+	
 	public function getUltimaFactura(){
 		$consulta00="SELECT
 		MAX(factura) as ultimaFct
