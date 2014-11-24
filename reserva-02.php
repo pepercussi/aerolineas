@@ -71,7 +71,7 @@ $estadoReserva = $Reserva->checkReserva($numeroReserva, $dniPasajero)
 					<?php
 					if($estadoReserva==1){
 					?>
-					<a class="btn btn-lg btn-default" href="pagos.php?rc=<?php echo $numeroReserva;?>&dni=<?php echo $dniPasajero;?>">Abonar Esta Reserva <span class="glyphicon glyphicon-usd"></span></a>
+					<a class="btn btn-lg btn-default" href="pago.php?rc=<?php echo $numeroReserva;?>&dni=<?php echo $dniPasajero;?>">Abonar Esta Reserva <span class="glyphicon glyphicon-usd"></span></a>
 					&nbsp;
 					<?php
 					}//End if
