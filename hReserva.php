@@ -22,21 +22,66 @@ if(isset($_POST['metodo'])){
 					$cantConfirmadaAsientos=$Reserva->getReservasConfirmadasByVueloAndClase($av['cod'], $ac['cod']);
 					$puestosLibres=$cantTotAsientos-$cantConfirmadaAsientos;
 					
+					echo "<p class='bg-success'><span class='glyphicon glyphicon-plane'></span>&nbsp;Procesando vuelo codigo: ".$av['cod']." para la clase ".$ac['tipo']."...</p>";
+					
 					if($puestosLibres>0){//Si hay puestos libres busco pasajeros en lista de espera
 						$arrPasajeros=$Pasajero->getArrayPasajerosEnEspera($av['cod'], $ac['cod'], $cantTotAsientos, $puestosLibres);
 						
+						echo "<p class='bg-success'><span class='glyphicon glyphicon-briefcase'></span>&nbsp;Se encontraron puestos libres en el vuelo codigo: ".$av['cod'].". Buscando pasajeros en lista de espera...</p>";
+						
 						if(count($arrPasajeros)>0){//Si hay pasajeros en espera les informo
+						
+							echo "<p class='bg-success'><span class='glyphicon glyphicon-send'></span>&nbsp;Enviando correos a pasajeros del vuelo codigo: ".$av['cod']."...</p>";
 							foreach($arrPasajeros as $ap){//Envio los correos a los pasajeros en lista de espera
+								require("lib/php-mailer/class.phpmailer.php");
+								$cuerpoMail="
+								<html>
+									<head>
+										<title>Aerolineas - Disponibilidad de Plazas</title>
+									</head>
+									<body>
+										<h1>Aerolineas - Disponibilidad de Plazas</h1>
+										<h2>Estimado/a ".$ap['nombre']." ".$ap['apellido']."</h2>
+										<p>A la fecha se encuentran plazas disponibles para que usted pueda realizar el vuelo solicitado oportunamente con el c&oacute;digo de reserva ".$ap['nro_reserva']." .</p>
+										<p>Si a&uacute;n desea viajar debe abonar el mismo ingrsando <a href='http://localhost/aerolineas/pago.php'>aqu&iacute;</a> y luego realizar el check-in correspondiente.</p>
+										<p>Aerolineas le desea un placentero viaje.</p>
+									</body>
+								</html>";
+
+								$mail = new PHPMailer();
+								$mail->IsSMTP();
+								$mail->SMTPAuth = true;
+								$mail->Host = AUTO_MAIL_HOST; // SMTP a utilizar. Por ej. smtp.elserver.com
+								$mail->Username = AUTO_MAIL_DIR; // Correo completo a utilizar
+								$mail->Password = AUTO_MAIL_PASS; // Contraseña
+								$mail->Port = 26; // Puerto a utilizar
 								
+								$mail->From = AUTO_MAIL_DIR; // Desde donde enviamos (Para mostrar)
+								$mail->FromName = "Aerolineas";
+
+
+								$mail->AddAddress($ap['mail']); // Esta es la direccion a donde enviamos
 								
-								
+								$mail->IsHTML(true); // El correo se envía como HTML
+								$mail->Subject = "Aerolineas - Disponibilidad de Plazas"; // Este es el titulo del email.
+								$mail->Body = $cuerpoMail; // Mensaje a enviar
+								$mail->Timeout = 600;
+								//$exito = $mail->Send(); // Envía el correo.
+								echo "<p class='bg-success'><span class='glyphicon glyphicon-ok'></span>&nbsp;Se envio el correo a : ".$ap['mail']."</p>";
+
 							}//End foreach pasajeros
+						}else{
+							echo "<p class='bg-info'><span class='glyphicon glyphicon-info-sign'></span>&nbsp;No hay pasajeros en lista de espera para el vuelo codigo: ".$av['cod']."...</p>";
 						}//End if pasajeros en espera
 						
+					}else{
+						echo "<p class='bg-info'><span class='glyphicon glyphicon-info-sign'></span>&nbsp;No hay puestos libres en el vuelo codigo: ".$av['cod']."...</p>";
 					}//End if puestos libres
 					
 				}//End foreach Clases
 			}//End foreach vuelos
+		}else{
+			echo "<p class='bg-info'><span class='glyphicon glyphicon-info-sign'></span>&nbsp;No se encontraron vuelos proximos a vencer.</p>";
 		}//End if
 	}//End method alertaReservasSinConfirmar
 

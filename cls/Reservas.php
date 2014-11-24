@@ -313,7 +313,7 @@ class Reservas{
 		AND clase=".$codClase."
 		;";
 		
-		$result00=$this->db->query($consulta);
+		$result00=$this->db->query($consulta00);
 		if(count($result00)>0){
 			foreach($result00 as $r00){
 				return $r00['cantidad'];
