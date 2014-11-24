@@ -81,6 +81,15 @@ class Vuelos{
 		
 	}//End getArrayVuelosByCodigo
 	
+	public function getArrayVuelosPorVencer($dias){
+		$consulta00="SELECT cod, fecha_sal, fecha_llegada, cod_se_dirige_a, cod_parte_de, cod_asignado_a as cod_avion
+		FROM vuelo
+		WHERE fecha_sal>=NOW() AND fecha_sal<=DATE_ADD(NOW(), INTERVAL ".$dias." DAY);";
+		
+		return $this->db->query($consulta00);
+
+	}//End method getArrayVuelosPorVencer
+	
 	public function getCodAvionByVuelo($codVuelo){
 		$consulta00="SELECT cod_asignado_a as cod_avion
 		FROM vuelo
