@@ -108,5 +108,36 @@ class Vuelos{
 		
 	}//End method getCodAvionByVuelo
 	
+	public function getAllVuelos(){
+		$consulta = "SELECT
+		v.cod as codigo_vuelo,
+		v.fecha_sal as fecha_salida,
+		v.fecha_llegada as fecha_llegada,
+		a1.cod as cod_destino,
+		concat(a1.nombre, ' - ', pa1.nombre) as destino,
+		a2.cod as cod_origen,
+		concat(a2.nombre, ' - ', pa2.nombre) as origen,
+		av.cod as codigo_avion,
+		concat(av.marca, ' - ', av.modelo) as avion
+		
+		
+		FROM vuelo v
+		
+		INNER JOIN aeropuerto a1 on a1.cod=v.cod_se_dirige_a
+		INNER JOIN pcia p1 on p1.cod=a1.cod_pcia
+		INNER JOIN pais pa1 on pa1.cod=p1.cod_pais
+		
+		INNER JOIN aeropuerto a2 on a2.cod=v.cod_parte_de
+		INNER JOIN pcia p2 on p2.cod=a2.cod_pcia
+		INNER JOIN pais pa2 on pa2.cod=p2.cod_pais
+		
+		INNER JOIN avion av on av.cod=v.cod_asignado_a
+		;";
+
+		//echo "<br/>".$consulta."<br/>";
+		
+		return $this->db->query($consulta);
+	}
+	
 }// End Class Vuelos
 ?>

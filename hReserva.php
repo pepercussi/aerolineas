@@ -51,12 +51,12 @@ if(isset($_POST['metodo'])){
 								$mail = new PHPMailer();
 								$mail->IsSMTP();
 								$mail->SMTPAuth = true;
-								$mail->Host = AUTO_MAIL_HOST; // SMTP a utilizar. Por ej. smtp.elserver.com
-								$mail->Username = AUTO_MAIL_DIR; // Correo completo a utilizar
-								$mail->Password = AUTO_MAIL_PASS; // Contraseña
-								$mail->Port = 26; // Puerto a utilizar
+								$mail->Host = 'smtp.stooge.com.ar'; // SMTP a utilizar. Por ej. smtp.elserver.com
+								$mail->Username = 'test@stooge.com.ar'; // Correo completo a utilizar
+								$mail->Password = 'aerolineas2015'; // Contraseña
+								$mail->Port = 25; // Puerto a utilizar
 								
-								$mail->From = AUTO_MAIL_DIR; // Desde donde enviamos (Para mostrar)
+								$mail->From = 'test@stooge.com.ar'; // Desde donde enviamos (Para mostrar)
 								$mail->FromName = "Aerolineas";
 
 

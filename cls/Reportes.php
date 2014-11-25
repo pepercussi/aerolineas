@@ -56,7 +56,41 @@ class Reportes{
 		return $this->db->query($consulta00);
 	}//End method getArrayClases
 
-				
+	public function getOcupacionByVuelo($codVuelo){
+		$consulta00="SELECT cod_vuelo		
+		FROM reserva r
+		INNER JOIN vuelo v on v.cod=r.cod_vuelo
+		WHERE r.cod_vuelo=".$codVuelo."
+ 		";
+ 		
+ 		$resultado00 = $this->db->query($consulta00);
+ 		
+ 		$cantVuelos = count ($resultado00); //cantidad de reservas en ese vuelo
+ 		
+ 		$consulta01="SELECT t.total_plazas
+		FROM vuelo v
+		INNER JOIN avion a on a.cod=v.cod_asignado_a
+		INNER JOIN tipo t on t.cod=a.cod_tipo
+		WHERE v.cod_asignado_a=".$codVuelo."
+		LIMIT 1;";
+		
+		$resultado01 = $this->db->query($consulta01);
+		
+		$cantTotal=0;
+		$cantOcupada=0;
+		if($cantVuelos!=0){
+			foreach($resultado01 as $r01){
+				echo "<p class='bg-success text-center'><span class='glyphicon glyphicon-ok'></span>&nbsp;La cantidad de asientos ocupados es de <strong>".$cantVuelos."</strong> sobre <strong>".$r01['total_plazas']."</strong> plazas disponibles</p>";
+				$cantTotal=$r01['total_plazas'];
+				$cantOcupada=$cantTotal-$cantVuelos;
+			}	
+		}else{
+			echo "<p class='bg-success text-center'><span class='glyphicon glyphicon-ok'></span>&nbsp;El avion se encuentra disponible en el 100% de sus plazas.</p>";
+		}
+		
+		
+	}//End method getOcupacionByVuelo
+	
 }// End Class Aviones
 ?>
 

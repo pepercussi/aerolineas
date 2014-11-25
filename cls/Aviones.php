@@ -188,6 +188,14 @@ class Aviones{
 			return 0;
 		}//End if
 	}//End method getNroAsientoByCodAsiento
+	
+	public function getArrayAviones(){
+		$consulta00="SELECT *
+		FROM avion";
+		
+		return $this->db->query($consulta00);
+	}//End method getArrayAviones
+	
 			
 }// End Class Aviones
 ?>

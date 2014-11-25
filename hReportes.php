@@ -42,5 +42,12 @@ if(isset($_POST['metodo'])){
 		}//End if
 		
 	}//End method buscaPasajesVendidos
+	
+	if($metodo=="buscaOcupacion"){
+		$Reporte = new Reportes();
+		$vuelo=$_POST['cod_vuelo'];
+		$arrReporte = $Reporte->getOcupacionByVuelo($vuelo);
+		
+	}//End method buscarOcupacion
 
 }//End if post
