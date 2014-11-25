@@ -1,4 +1,4 @@
-<?php require_once('cfg/core.php') ?>
+<?php require_once('cfg/core.php')?>
 <?php
 $Aeropuerto = new Aeropuertos();
 $Avion = new Aviones();
@@ -50,11 +50,9 @@ $Avion = new Aviones();
 		<!-- START LOAD BLOCK -->
 		<?php include("load_block.php"); ?>
 		<!-- END LOAD BLOCK -->
-		
 		<!-- START NAV BAR -->
 		<?php include("nav_bar.php");?>
 		<!-- END NAV BAR -->
-		
 		<div id='contenedorPrincipal' class="container maincont">
 			<div class="row">
 				<div class="col-md-12 col-xs-12"><h1>Pasajes Vendidos</h1></div>
@@ -68,7 +66,6 @@ $Avion = new Aviones();
 							<option value="0" selected="selected">Todas</option>
 							<?php
 							$arrCategorias = $Avion->getArrayClases();
-							
 							if(count($arrCategorias)>0){
 								foreach($arrCategorias as $ac){
 									echo "<option value='".$ac['cod']."'>".$ac['tipo']."</option>";
@@ -102,14 +99,11 @@ $Avion = new Aviones();
 						<button type="button" class="btn btn-default" onclick="buscaPasajes()">Buscar <span class="glyphicon glyphicon-search"></span></button>
 					</div>
 				</div>
-				
 				<div class="row separador01"></div>
 				<div class="row">
 					<div class="col-md-12 col-xs-12" id="contResult">
-						
 					</div>
 				</div>
-				
 			</form>
 		</div>
 	</body>

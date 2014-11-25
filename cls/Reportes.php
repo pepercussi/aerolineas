@@ -51,11 +51,77 @@ class Reportes{
 			$consulta00.=" AND a1.cod=".$codDestino;
 		}
 		
-		$consulta00.=";";
+		$consulta00.=" ORDER BY r.cod;";
 
 		return $this->db->query($consulta00);
-	}//End method getArrayClases
+	}//End method getArrayVuelosVendidos
 
+	public function getArrayVuelosVendidosGroupByDestino($codClase, $codDestino){
+		$consulta00="SELECT
+		a1.cod as cod_destino,
+		concat(a1.nombre, ' - ', a1.ciudad, ' - ', p1.nombre, ' - ', pa1.nombre) as destino,
+	    count(a1.cod) as cant
+		
+		FROM reserva r
+		INNER JOIN clase c ON c.cod=r.clase
+		INNER JOIN vuelo v ON v.cod=r.cod_vuelo
+		
+		INNER JOIN aeropuerto a2 on a2.cod=v.cod_parte_de
+		INNER JOIN pcia p2 on p2.cod=a2.cod_pcia
+		INNER JOIN pais pa2 on pa2.cod=p2.cod_pais
+		
+		INNER JOIN aeropuerto a1 on a1.cod=v.cod_se_dirige_a
+		INNER JOIN pcia p1 on p1.cod=a1.cod_pcia
+		INNER JOIN pais pa1 on pa1.cod=p1.cod_pais
+		
+		
+		WHERE r.factura>0";
+		
+		if($codClase!=0){
+			$consulta00.=" AND c.cod=".$codClase;
+		}
+		if($codDestino!=0){
+			$consulta00.=" AND a1.cod=".$codDestino;
+		}
+		
+		$consulta00.=" GROUP BY a1.cod ORDER BY r.cod;";
+
+		return $this->db->query($consulta00);
+	}//End method getArrayVuelosVendidosGroupByDestino
+
+	public function getArrayVuelosVendidosGroupByClase($codClase, $codDestino){
+		$consulta00="SELECT
+		r.clase as codigo_clase,
+		c.tipo as nombre_clase,
+	    count(r.clase) as cant
+		
+		FROM reserva r
+		INNER JOIN clase c ON c.cod=r.clase
+		INNER JOIN vuelo v ON v.cod=r.cod_vuelo
+		
+		INNER JOIN aeropuerto a2 on a2.cod=v.cod_parte_de
+		INNER JOIN pcia p2 on p2.cod=a2.cod_pcia
+		INNER JOIN pais pa2 on pa2.cod=p2.cod_pais
+		
+		INNER JOIN aeropuerto a1 on a1.cod=v.cod_se_dirige_a
+		INNER JOIN pcia p1 on p1.cod=a1.cod_pcia
+		INNER JOIN pais pa1 on pa1.cod=p1.cod_pais
+		
+		
+		WHERE r.factura>0";
+		
+		if($codClase!=0){
+			$consulta00.=" AND c.cod=".$codClase;
+		}
+		if($codDestino!=0){
+			$consulta00.=" AND a1.cod=".$codDestino;
+		}
+		
+		$consulta00.=" GROUP BY r.clase ORDER BY r.cod;";
+
+		return $this->db->query($consulta00);
+	}//End method getArrayVuelosVendidosGroupByDestino
+		
 	public function getOcupacionByVuelo($codVuelo){
 		$consulta00="SELECT cod_vuelo		
 		FROM reserva r
