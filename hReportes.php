@@ -114,9 +114,20 @@ if(isset($_POST['metodo'])){
 	
 	if($metodo=="buscaOcupacion"){
 		$Reporte = new Reportes();
-		$vuelo=$_POST['cod_vuelo'];
-		$arrReporte = $Reporte->getOcupacionByVuelo($vuelo);
+		$cod_vuelo=$_POST['cod_vuelo'];
+		$arrReporte = $Reporte->getOcupacionByVuelo($cod_vuelo);
 		
 	}//End method buscarOcupacion
 
+	if($metodo=="buscaReservasCaidas"){
+		$Reporte = new Reportes();
+		$cod_vuelo=$_POST['cod_vuelo'];
+		$arrReporte = $Reporte->getReservasCaidas($cod_vuelo);
+		$cantCaidas=count($arrReporte);
+		echo "Caidas: ".$cantCaidas;
+		foreach($arrReporte as $arr){
+			echo $arr['cod'];
+		}
+	
+	}//End method buscarOcupacion
 }//End if post

@@ -132,6 +132,8 @@ class Vuelos{
 		INNER JOIN pais pa2 on pa2.cod=p2.cod_pais
 		
 		INNER JOIN avion av on av.cod=v.cod_asignado_a
+		
+		GROUP BY fecha_salida
 		;";
 
 		//echo "<br/>".$consulta."<br/>";

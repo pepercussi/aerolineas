@@ -7,7 +7,7 @@ $Vuelo = new Vuelos();
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ES">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Aerolineas - Reportes - Ocupacion por vuelo</title>
+		<title>Aerolineas - Reportes - Reservas Caidas</title>
 		<!-- START ESTILOS -->
 		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css"><!-- Bootstrap -->
 		<link rel="stylesheet" href="lib/jquery-ui-1.11.2/jquery-ui.css"><!-- Jquery UI -->
@@ -20,11 +20,11 @@ $Vuelo = new Vuelos();
 		<script type="text/javascript" src="lib/jquery-ui-1.11.2/jquery-ui.js"></script><!-- Jquery UI -->
 		<script type="text/javascript" src="js/reserva.js"></script><!-- Scripts de esta opcion -->
 		<script type="text/javascript">
-			function buscaOcupacion(){
+			function buscaReservasCaidas(){
 				loadBarShow();
 				vuelo = $("#selVuelo").val();
 				url = "hReportes.php";
-				metod = "buscaOcupacion";
+				metod = "buscaReservasCaidas";
 				$("#contResult").empty();
 				$("#contResult").load(
 					url,
@@ -54,7 +54,7 @@ $Vuelo = new Vuelos();
 		
 		<div id='contenedorPrincipal' class="container maincont">
 			<div class="row">
-				<div class="col-md-12 col-xs-12"><h1>Ocupacion por vuelo</h1></div>
+				<div class="col-md-12 col-xs-12"><h1>Reservas Caidas</h1></div>
 			</div>
 			<div class="row separador01"></div>
 			<form id="frmReporte" action="#" method="post" role="form" class="form-inline">
@@ -62,7 +62,7 @@ $Vuelo = new Vuelos();
 					<div class="col-md-1 col-xs-12"><label>Vuelo:</label></div>
 					<div class="col-md-11 col-xs-12">
 						<select class="form-control" name="selVuelo" id="selVuelo">
-							<option value="0" selected="selected">Seleccione un vuelo</option>
+							<option value="0" selected="selected">Todas</option>
 							<?php
 							$arrVuelos = $Vuelo->getAllVuelos();
 							
@@ -79,7 +79,7 @@ $Vuelo = new Vuelos();
 				</div>
 				<div class="row rowFiltro00">
 					<div class="col-md-12 col-xs-12 text-center">
-						<button type="button" class="btn btn-default" onclick="buscaOcupacion()">Buscar <span class="glyphicon glyphicon-search"></span></button>
+						<button type="button" class="btn btn-default" onclick="buscaReservasCaidas()">Buscar <span class="glyphicon glyphicon-search"></span></button>
 					</div>
 				</div>
 				

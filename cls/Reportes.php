@@ -123,16 +123,27 @@ class Reportes{
 	}//End method getArrayVuelosVendidosGroupByDestino
 		
 	public function getOcupacionByVuelo($codVuelo){
-		$consulta00="SELECT cod_vuelo		
+		$consulta00="SELECT cod_vuelo, clase		
 		FROM reserva r
-		INNER JOIN vuelo v on v.cod=r.cod_vuelo
+		
 		WHERE r.cod_vuelo=".$codVuelo."
+		AND cod_asiento>0
  		";
  		
  		$resultado00 = $this->db->query($consulta00);
  		
- 		$cantVuelos = count ($resultado00); //cantidad de reservas en ese vuelo
+ 		$cantVuelos = count ($resultado00); //cantidad de reservas en ese vuelo efectivas con check-in realizado
  		
+ 		$countPrimera=0;
+ 		$countEcono=0;
+ 		foreach ($resultado00 as $r00){
+ 			if($r00['clase']==1){
+ 				$countPrimera++;
+ 			}else{
+ 				$countEcono++;
+ 			}//End if
+ 		}
+ 		 		
  		$consulta01="SELECT t.total_plazas
 		FROM vuelo v
 		INNER JOIN avion a on a.cod=v.cod_asignado_a
@@ -156,6 +167,25 @@ class Reportes{
 		
 		
 	}//End method getOcupacionByVuelo
+	
+	public function getReservasCaidas($codVuelo){
+		$Vuelo = new Vuelos();
+		$arrVuelo = $Vuelo->getArrayVuelosByCodigo($codVuelo);
+		$fecha_sal=0;
+		foreach($arrVuelo as $arr){
+			$fecha_sal=$arr['fecha_salida'];
+		}
+		
+		$consulta00="SELECT r.cod, v.fecha_sal 
+		FROM reserva r 
+		INNER JOIN vuelo v on v.cod=r.cod_vuelo 
+		WHERE checkin=0 AND '".$fecha_sal. "'>=NOW() AND '".$fecha_sal."'<=DATE_ADD('".$fecha_sal."', INTERVAL -2 HOUR)";		
+		
+		echo $consulta00;
+		
+		return $this->db->query($consulta00);
+
+	}
 	
 }// End Class Aviones
 ?>
