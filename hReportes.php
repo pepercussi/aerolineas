@@ -12,6 +12,10 @@ if(isset($_POST['metodo'])){
 		$cantVuelos = count($arrReporte);
 		
 		if($cantVuelos>0){
+			require_once ('lib/src/jpgraph/jpgraph.php');
+			require_once ('lib/src/jpgraph/jpgraph_pie.php');
+			require_once ('lib/src/jpgraph/jpgraph_pie3d.php');
+			
 			echo "<table class='table table-striped'>";
 				echo "<thead>";
 					echo "<tr>";
