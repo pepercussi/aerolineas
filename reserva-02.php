@@ -1,11 +1,70 @@
 <?php require_once('cfg/core.php') ?>
 <?php
+require_once('lib/fpdf17/fpdf.php');
 //Controlo que esxista el tipo de vuelo
 $numeroReserva=$_GET['rc'];
 $dniPasajero=$_GET['dni'];
 
 $Reserva = new Reservas();
-$estadoReserva = $Reserva->checkReserva($numeroReserva, $dniPasajero)
+$Pasajero = new Pasajeros();
+$estadoReserva = $Reserva->checkReserva($numeroReserva, $dniPasajero);
+
+$arrPasajero = $Pasajero->getNombreyApellidoByDni($dniPasajero);
+$nya="";
+if(count($arrPasajero)>0){
+	foreach($arrPasajero as $ap){
+		$nya = $ap['nombre']." ".$ap['apellido'];
+	}//End foreach
+}//End if
+
+$arrReserva = $Reserva->getArrayReserva($dniPasajero,$numeroReserva);
+$cantReservas = count($arrReserva);
+
+$pdf = new FPDF('P','mm','A4');
+$pdf->AddPage(); 
+$pdf->SetFont('Arial','B',16);
+$pdf->Cell(200,10,'Aerolineas - Confirmacion de Reserva',0,1,'C');
+$pdf->SetFont('Arial','B',14);
+$pdf->Cell(200,10,'Codigo de reserva:',0,1,'C');
+$pdf->SetFont('Arial','',20);
+$pdf->Cell(200,10,$numeroReserva,0,1,'C');
+$pdf->SetFont('Arial','B',14);
+$pdf->Cell(200,10,'Nombre y Apellido:',0,1,'C');
+$pdf->SetFont('Arial','',14);
+$pdf->Cell(200,10,$nya,0,1,'C');
+$pdf->SetFont('Arial','B',14);
+$pdf->Cell(200,10,'D.N.I.:',0,1,'C');
+$pdf->SetFont('Arial','',14);
+$pdf->Cell(200,10,$dniPasajero,0,1,'C');
+$flag=0;
+if($cantReservas>0){
+	foreach($arrReserva as $ar){
+		if($flag==0){
+			$flag++;
+			$pdf->SetFont('Arial','B',15);
+			$pdf->Cell(50,10,'Vuelo de ida:',0,1,'L');
+		}else{
+			$pdf->SetFont('Arial','B',15);
+			$pdf->Cell(50,10,'Vuelo de vuelta:',0,1,'L');
+		}
+		$pdf->SetFont('Arial','B',14);
+		$pdf->Cell(50,10,'Fecha Salida:',0,0,'R');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(150,10,$ar['fecha_sal'],0,0,'L');
+		$pdf->Ln();
+		$pdf->SetFont('Arial','B',14);
+		$pdf->Cell(50,10,'Origen:',0,0,'R');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(150,10,$ar['origen'],0,0,'L');
+		$pdf->Ln();
+		$pdf->SetFont('Arial','B',14);
+		$pdf->Cell(50,10,'Destino:',0,0,'R');
+		$pdf->SetFont('Arial','',12);
+		$pdf->Cell(150,10,$ar['destino'],0,0,'L');
+		$pdf->Ln();
+	}//End foreach
+}//End if
+$pdf->Output("media/pdf/cr".$dniPasajero."-".$numeroReserva.".pdf");
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -71,6 +130,8 @@ $estadoReserva = $Reserva->checkReserva($numeroReserva, $dniPasajero)
 					<?php
 					if($estadoReserva==1){
 					?>
+					<a target="_blank" class="btn btn-lg btn-default" href='<?php echo "media/pdf/cr".$dniPasajero."-".$numeroReserva.".pdf";?>'>Descargar PDF <span class="glyphicon glyphicon-floppy-save"></span></a>
+					&nbsp;
 					<a class="btn btn-lg btn-default" href="pago.php?rc=<?php echo $numeroReserva;?>&dni=<?php echo $dniPasajero;?>">Abonar Esta Reserva <span class="glyphicon glyphicon-usd"></span></a>
 					&nbsp;
 					<?php
